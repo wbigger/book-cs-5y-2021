@@ -1,0 +1,10 @@
+[book]
+authors = ["Claudio"]
+language = "it"
+multilingual = false
+src = "src"
+title = "Informatica - Quinto anno - Materiale didattico"
+
+[build]
+build-dir = "docs"
+create-missing = true
