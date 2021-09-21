@@ -1,0 +1,22 @@
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.w50p {
+    width: 50%;
+}
+
+.w100p {
+    width: 100%;
+}
+
+figcaption {
+    text-align: center;
+}
+
+img {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
