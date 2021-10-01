@@ -139,15 +139,74 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="cheat-sheet"><a class="header" href="#cheat-sheet">Cheat Sheet</a></h1>
-<!-- TODO: cambiare la tabella in un elenco per facilitare la lettura -->
-<table><thead><tr><th>Sintassi</th><th>Esempio</th><th>Descrizione</th></tr></thead><tbody>
-<tr><td><strong>SHOW DATABASES</strong></td><td>SHOW DATABASES;</td><td>elenca tutti i database del <strong>DBMS</strong></td></tr>
-<tr><td><strong>USE</strong> <em>nome_database</em></td><td>USE calendario;</td><td>seleziona un database</td></tr>
-<tr><td><strong>CREATE TABLE</strong> <em>nome_tabella</em> (<em>nome_colonna</em> <em>tipo_colonna</em>)</td><td>CREATE TABLE eventi (titolo varchar(100));</td><td>crea una tabella all'interno del database</td></tr>
-<tr><td><strong>SHOW TABLES</strong></td><td>SHOW TABLES;</td><td>elenca tutte le tabelle nel database</td></tr>
-<tr><td><strong>DROP TABLE</strong> <em>nome_tabella</em></td><td>DROP TABLE eventi;</td><td>elimina una tabella</td></tr>
+<h2 id="tipi-dati"><a class="header" href="#tipi-dati">Tipi dati</a></h2>
+<table><thead><tr><th>Tipo</th><th align="center">Limiti</th><th align="center">Byte</th></tr></thead><tbody>
+<tr><td><strong>CHAR(</strong><em>n_caratteri</em><strong>)</strong></td><td align="center"><strong>0</strong> ≤ <em>n_caratteri</em> ≤ <strong>255</strong></td><td align="center"><strong>1-255</strong></td></tr>
+<tr><td><strong>VARCHAR(</strong><em>n_caratteri</em><strong>)</strong></td><td align="center"><strong>0</strong> ≤ <em>n_caratteri</em> ≤ <strong>255</strong></td><td align="center"><strong>1-255</strong></td></tr>
+<tr><td><strong>TINYINT</strong></td><td align="center"><strong>-128</strong> ≤ <em>valore</em> ≤ <strong>127</strong></td><td align="center"><strong>1</strong></td></tr>
+<tr><td><strong>INT</strong></td><td align="center"><strong>-2·10⁹</strong> ≤ <em>valore</em> ≤ <strong>2·10⁹</strong></td><td align="center"><strong>4</strong></td></tr>
+<tr><td><strong>BIGINT</strong></td><td align="center"><strong>-2·10⁶³</strong> ≤ <em>valore</em> ≤ <strong>2·10⁶³</strong></td><td align="center"><strong>8</strong></td></tr>
 </tbody></table>
-
+<h2 id="comandi"><a class="header" href="#comandi">Comandi</a></h2>
+<hr>
+<span class="font-md">
+<p><strong>SHOW DATABASES;</strong></p>
+</span>
+<p>Elenca tutti i database del <strong>DBMS</strong></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">SHOW DATABASES;
+</code></pre>
+</details>
+<hr>
+<span class="font-md">
+<p><strong>SHOW TABLES</strong><strong>;</strong></p>
+</span>
+<p>Elenca tutte le tabelle nel database</p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">SHOW TABLES;
+</code></pre>
+</details>
+<hr>
+<span class="font-md">
+<p><strong>USE</strong> <em>nome_database</em><strong>;</strong></p>
+</span>
+<p>Seleziona un database</p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">USE calendario;
+</code></pre>
+<pre><code class="language-sql">USE bar;
+</code></pre>
+</details>
+<hr>
+<span class="font-md">
+<p><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em><strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></p>
+</span>
+<p>Crea una tabella all'interno del database</p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">CREATE TABLE eventi (titolo varchar(255), data int);
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
+</code></pre>
+</details>
+<hr>
+<span class="font-md">
+<p><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></p>
+</span>
+<p>Elimina una tabella dal database</p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">DROP TABLE prodotti;
+</code></pre>
+<pre><code class="language-sql">DROP TABLE utenti;
+</code></pre>
+<pre><code class="language-sql">DROP TABLE studenti;
+</code></pre>
+</details>
+<hr>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
