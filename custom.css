@@ -22,5 +22,9 @@ img {
 }
 
 .font-md {
-	font-size: 1.01em;
+	font-size: 1.05em;
+}
+
+.description {
+	color: darkgrey;
 }

@@ -11,14 +11,19 @@
 | __BIGINT__ | __-2·10⁶³__ ≤ *valore* ≤ __2·10⁶³__ | __8__ | 
 
 ## Comandi
-<hr>
+<!-- <hr> -->
 <span class="font-md">
 
 **SHOW DATABASES;**
 
 </span>
 
-Elenca tutti i database del **DBMS**
+<span class="description">
+
+*Elenca tutti i database del DBMS*
+
+</span>
+
 <details closed> 
 <summary>Esempi</summary>
 
@@ -26,7 +31,7 @@ Elenca tutti i database del **DBMS**
 SHOW DATABASES;
 ```
 </details>
-<hr>
+<br>
 
 
 <span class="font-md">
@@ -35,7 +40,12 @@ SHOW DATABASES;
 
 </span>
 
-Elenca tutte le tabelle nel database
+<span class="description">
+
+*Elenca tutte le tabelle nel database*
+
+</span>
+
 <details closed> 
 <summary>Esempi</summary>
 
@@ -43,7 +53,7 @@ Elenca tutte le tabelle nel database
 SHOW TABLES;
 ```
 </details>
-<hr>
+<br>
 
 
 <span class="font-md">
@@ -52,7 +62,12 @@ SHOW TABLES;
 
 </span>
 
-Seleziona un database
+<span class="description">
+
+*Seleziona un database*
+
+</span>
+
 <details closed> 
 <summary>Esempi</summary>
 
@@ -63,7 +78,7 @@ USE calendario;
 USE bar;
 ```
 </details>
-<hr>
+<br>
 
 
 <span class="font-md">
@@ -72,7 +87,12 @@ USE bar;
 
 </span>
 
-Crea una tabella all'interno del database
+<span class="description">
+
+*Crea una tabella all'interno del database*
+
+</span>
+
 <details closed> 
 <summary>Esempi</summary>
 
@@ -83,7 +103,7 @@ CREATE TABLE eventi (titolo varchar(255), data int);
 CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
 ```
 </details>
-<hr>
+<br>
 
 
 <span class="font-md">
@@ -92,7 +112,12 @@ CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned
 
 </span>
 
-Elimina una tabella dal database
+<span class="description">
+
+*Elimina una tabella dal database*
+
+</span>
+
 <details closed> 
 <summary>Esempi</summary>
 
@@ -106,4 +131,4 @@ DROP TABLE utenti;
 DROP TABLE studenti;
 ```
 </details>
-<hr>
+<br>

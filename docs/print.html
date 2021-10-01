@@ -161,31 +161,37 @@
 <tr><td><strong>BIGINT</strong></td><td align="center"><strong>-2·10⁶³</strong> ≤ <em>valore</em> ≤ <strong>2·10⁶³</strong></td><td align="center"><strong>8</strong></td></tr>
 </tbody></table>
 <h2 id="comandi"><a class="header" href="#comandi">Comandi</a></h2>
-<hr>
+<!-- <hr> -->
 <span class="font-md">
 <p><strong>SHOW DATABASES;</strong></p>
 </span>
-<p>Elenca tutti i database del <strong>DBMS</strong></p>
+<span class="description">
+<p><em>Elenca tutti i database del DBMS</em></p>
+</span>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SHOW DATABASES;
 </code></pre>
 </details>
-<hr>
+<br>
 <span class="font-md">
 <p><strong>SHOW TABLES</strong><strong>;</strong></p>
 </span>
-<p>Elenca tutte le tabelle nel database</p>
+<span class="description">
+<p><em>Elenca tutte le tabelle nel database</em></p>
+</span>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SHOW TABLES;
 </code></pre>
 </details>
-<hr>
+<br>
 <span class="font-md">
 <p><strong>USE</strong> <em>nome_database</em><strong>;</strong></p>
 </span>
-<p>Seleziona un database</p>
+<span class="description">
+<p><em>Seleziona un database</em></p>
+</span>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">USE calendario;
@@ -193,11 +199,13 @@
 <pre><code class="language-sql">USE bar;
 </code></pre>
 </details>
-<hr>
+<br>
 <span class="font-md">
 <p><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em><strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></p>
 </span>
-<p>Crea una tabella all'interno del database</p>
+<span class="description">
+<p><em>Crea una tabella all'interno del database</em></p>
+</span>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">CREATE TABLE eventi (titolo varchar(255), data int);
@@ -205,11 +213,13 @@
 <pre><code class="language-sql">CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
 </code></pre>
 </details>
-<hr>
+<br>
 <span class="font-md">
 <p><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></p>
 </span>
-<p>Elimina una tabella dal database</p>
+<span class="description">
+<p><em>Elimina una tabella dal database</em></p>
+</span>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">DROP TABLE prodotti;
@@ -219,7 +229,7 @@
 <pre><code class="language-sql">DROP TABLE studenti;
 </code></pre>
 </details>
-<hr>
+<br>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
