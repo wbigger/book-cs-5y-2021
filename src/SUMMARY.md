@@ -2,3 +2,4 @@
 
 - [Introduzione ai database](./chapter_1.md)
 - [Cheat Sheet](./cheat_sheet.md)
+- [Playground](./playground.md)
