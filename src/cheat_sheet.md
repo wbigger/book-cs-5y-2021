@@ -10,7 +10,7 @@
 | __INT__ | __-2·10⁹__ ≤ *valore* ≤ __2·10⁹__ | __4__ | 
 | __BIGINT__ | __-2·10⁶³__ ≤ *valore* ≤ __2·10⁶³__ | __8__ | 
 
-## Comandi
+## Query
 <!-- <hr> -->
 <span class="font-md">
 
@@ -132,3 +132,87 @@ DROP TABLE studenti;
 ```
 </details>
 <br>
+
+
+<span class="font-md">
+
+**INSERT INTO** *nome_tabella* __(__*nome_colonna*, *nome_colonna2...*__)__ **VALUES** __(__*valore*, *valore2...*__);__
+
+</span>
+
+<span class="description">
+
+*Inserisce una entry (riga) nella tabella*
+
+</span>
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+INSERT INTO studenti (nome, cognome) VALUES ('Mario', 'Rossi');
+```
+```sql
+INSERT INTO targhe (targa) VALUES ('AB123CD');
+```
+```sql
+INSERT INTO prodotti (nome, costo, disponibilita) VALUES ('Acqua', 0.50);
+```
+</details>
+<br>
+
+
+<span class="font-md">
+
+**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella*__;__
+
+</span>
+
+<span class="description">
+
+*Seleziona (filtrando) dati da una tabella*
+
+</span>
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+SELECT nome, cognome FROM dipendenti;
+```
+```sql
+SELECT costo FROM merendine;
+```
+```sql
+SELECT * FROM video -- "*" significa "tutte le colonne";
+```
+</details>
+<br>
+
+
+<span class="font-md">
+
+**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella* **WHERE** *condizione*__;__
+
+</span>
+
+<span class="description">
+
+*WHERE introduce una o più condizioni per filtrare le entry*
+
+</span>
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+SELECT nome, cognome FROM cittadini WHERE regione='Lazio';
+```
+```sql
+SELECT nome, indirizzo FROM hotel WHERE costo < 150.00 AND stanze_libere > 2;
+```
+```sql
+SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
+```
+</details>
+<br>	
