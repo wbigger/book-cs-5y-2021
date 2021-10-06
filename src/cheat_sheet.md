@@ -3,7 +3,7 @@
 ## Tipi dati
 
 | Tipo | Limiti | Byte |
-||::|::| 
+|-|:-:|:-:| 
 | __CHAR(__*n_caratteri*__)__ | __0__ ≤ *n_caratteri* ≤ __255__ | __1-255__ |
 | __VARCHAR(__*n_caratteri*__)__ | __0__ ≤ *n_caratteri* ≤ __255__ | __1-255__ |
 | __TINYINT__ | __-128__ ≤ *valore* ≤ __127__ | __1__ | 
