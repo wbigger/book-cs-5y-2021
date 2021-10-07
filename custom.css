@@ -20,3 +20,20 @@ img {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+.font-md {
+	font-size: 1.05em;
+}
+
+.description {
+	color: darkgrey;
+}
+
+iframe {
+	width: 100%;
+	height: 650px;
+}
+
+/* p {
+	margin: unset;
+} */

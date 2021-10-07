@@ -1,5 +1,12 @@
-Please visit the web page on the link close to the project description to see the rendered web site.
+**Read the book [here](https://wbigger.github.io/book-cs-5y-2021/)!** Or click the **link** in the **About** section on the **right**.
 
-This site is made with mdbook, a static site generator written in Rust.
+This site is made with **[mdBook](https://rust-lang.github.io/mdBook/)**, a command line tool and **Rust** crate to create books with Markdown. To **build** the project, run the following commands:
+```
+cargo install mdbook
+mdbook build --open
+```
+Check the **[documentation](https://rust-lang.github.io/mdBook/cli/index.html)**
 
-For more information, please visit wbigger.github.io.
+<hr>
+
+*For more information, please visit wbigger.github.io*
