@@ -11,7 +11,8 @@
 | __BIGINT__ | __-2·10⁶³__ ≤ *valore* ≤ __2·10⁶³__ | __8__ | 
 
 ## Query
-<!-- <hr> -->
+
+<br>
 <span class="font-md">
 
 **SHOW DATABASES;**
@@ -31,6 +32,7 @@
 SHOW DATABASES;
 ```
 </details>
+<br>
 <br>
 
 
@@ -53,6 +55,7 @@ SHOW DATABASES;
 SHOW TABLES;
 ```
 </details>
+<br>
 <br>
 
 
@@ -79,11 +82,12 @@ USE bar;
 ```
 </details>
 <br>
+<br>
 
 
 <span class="font-md">
 
-**CREATE TABLE** *nome_tabella* __(__*nome_colonna* *tipo*__,__ *nome_colonna2* *tipo*__);__
+**CREATE TABLE** *nome_tabella* __(__*nome_colonna* *tipo* __,__ *nome_colonna2* *tipo*__);__
 
 </span>
 
@@ -102,7 +106,62 @@ CREATE TABLE eventi (titolo varchar(255), data int);
 ```sql
 CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
 ```
+
 </details>
+<br>
+<br>
+
+
+<span class="font-md">
+
+**PRIMARY KEY**
+
+</span>
+
+<span class="description">
+
+*Indica una o più colonne che identificano in modo univoco una riga*
+
+</span>
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
+```
+</details>
+<br>
+<br>
+
+
+
+<span class="font-md">
+
+**AUTO_INCREMENT**
+
+</span>
+
+<span class="description">
+
+*Incrementa il valore di una colonna ogni volta che viene aggiunta una riga*
+
+</span>
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
+```
+```sql
+CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
+```
+```sql
+CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
+```
+</details>
+<br>
 <br>
 
 
@@ -132,6 +191,7 @@ DROP TABLE studenti;
 ```
 </details>
 <br>
+<br>
 
 
 <span class="font-md">
@@ -159,6 +219,7 @@ INSERT INTO targhe (targa) VALUES ('AB123CD');
 INSERT INTO prodotti (nome, costo, disponibilita) VALUES ('Acqua', 0.50);
 ```
 </details>
+<br>
 <br>
 
 
@@ -188,11 +249,12 @@ SELECT * FROM video -- "*" significa "tutte le colonne";
 ```
 </details>
 <br>
+<br>
 
 
 <span class="font-md">
 
-**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella* **WHERE** *condizione*__;__
+**WHERE** *condizione*__;__
 
 </span>
 
@@ -216,3 +278,4 @@ SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
 ```
 </details>
 <br>	
+<br>

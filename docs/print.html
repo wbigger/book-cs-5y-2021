@@ -161,7 +161,7 @@
 <tr><td><strong>BIGINT</strong></td><td align="center"><strong>-2·10⁶³</strong> ≤ <em>valore</em> ≤ <strong>2·10⁶³</strong></td><td align="center"><strong>8</strong></td></tr>
 </tbody></table>
 <h2 id="query"><a class="header" href="#query">Query</a></h2>
-<!-- <hr> -->
+<br>
 <span class="font-md">
 <p><strong>SHOW DATABASES;</strong></p>
 </span>
@@ -174,6 +174,7 @@
 </code></pre>
 </details>
 <br>
+<br>
 <span class="font-md">
 <p><strong>SHOW TABLES</strong><strong>;</strong></p>
 </span>
@@ -185,6 +186,7 @@
 <pre><code class="language-sql">SHOW TABLES;
 </code></pre>
 </details>
+<br>
 <br>
 <span class="font-md">
 <p><strong>USE</strong> <em>nome_database</em><strong>;</strong></p>
@@ -200,8 +202,9 @@
 </code></pre>
 </details>
 <br>
+<br>
 <span class="font-md">
-<p><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em><strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></p>
+<p><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em> <strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></p>
 </span>
 <span class="description">
 <p><em>Crea una tabella all'interno del database</em></p>
@@ -213,6 +216,37 @@
 <pre><code class="language-sql">CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
 </code></pre>
 </details>
+<br>
+<br>
+<span class="font-md">
+<p><strong>PRIMARY KEY</strong></p>
+</span>
+<span class="description">
+<p><em>Indica una o più colonne che identificano in modo univoco una riga</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
+</code></pre>
+</details>
+<br>
+<br>
+<span class="font-md">
+<p><strong>AUTO_INCREMENT</strong></p>
+</span>
+<span class="description">
+<p><em>Incrementa il valore di una colonna ogni volta che viene aggiunta una riga</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
+</code></pre>
+</details>
+<br>
 <br>
 <span class="font-md">
 <p><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></p>
@@ -230,6 +264,7 @@
 </code></pre>
 </details>
 <br>
+<br>
 <span class="font-md">
 <p><strong>INSERT INTO</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em>, <em>nome_colonna2...</em><strong>)</strong> <strong>VALUES</strong> <strong>(</strong><em>valore</em>, <em>valore2...</em><strong>);</strong></p>
 </span>
@@ -245,6 +280,7 @@
 <pre><code class="language-sql">INSERT INTO prodotti (nome, costo, disponibilita) VALUES ('Acqua', 0.50);
 </code></pre>
 </details>
+<br>
 <br>
 <span class="font-md">
 <p><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em><strong>;</strong></p>
@@ -262,8 +298,9 @@
 </code></pre>
 </details>
 <br>
+<br>
 <span class="font-md">
-<p><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em> <strong>WHERE</strong> <em>condizione</em><strong>;</strong></p>
+<p><strong>WHERE</strong> <em>condizione</em><strong>;</strong></p>
 </span>
 <span class="description">
 <p><em>WHERE introduce una o più condizioni per filtrare le entry</em></p>
@@ -277,7 +314,8 @@
 <pre><code class="language-sql">SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
 </code></pre>
 </details>
-<br>	<div style="break-before: page; page-break-before: always;"></div><h1 id="playground"><a class="header" href="#playground">Playground</a></h1>
+<br>	
+<br><div style="break-before: page; page-break-before: always;"></div><h1 id="playground"><a class="header" href="#playground">Playground</a></h1>
 <iframe src="https://www.db-fiddle.com/" frameborder="0">
 </iframe>
                     </main>
