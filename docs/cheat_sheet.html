@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html" class="active"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html" class="active"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="playground.html"><strong aria-hidden="true">3.</strong> Playground</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -139,21 +139,141 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="cheat-sheet"><a class="header" href="#cheat-sheet">Cheat Sheet</a></h1>
-<!-- TODO: cambiare la tabella in un elenco per facilitare la lettura -->
-<table><thead><tr><th>Sintassi</th><th>Esempio</th><th>Descrizione</th></tr></thead><tbody>
-<tr><td><strong>SHOW DATABASES</strong></td><td>SHOW DATABASES;</td><td>elenca tutti i database del <strong>DBMS</strong></td></tr>
-<tr><td><strong>USE</strong> <em>nome_database</em></td><td>USE calendario;</td><td>seleziona un database</td></tr>
-<tr><td><strong>CREATE TABLE</strong> <em>nome_tabella</em> (<em>nome_colonna</em> <em>tipo_colonna</em>)</td><td>CREATE TABLE eventi (titolo varchar(100));</td><td>crea una tabella all'interno del database</td></tr>
-<tr><td><strong>SHOW TABLES</strong></td><td>SHOW TABLES;</td><td>elenca tutte le tabelle nel database</td></tr>
-<tr><td><strong>DROP TABLE</strong> <em>nome_tabella</em></td><td>DROP TABLE eventi;</td><td>elimina una tabella</td></tr>
+<h2 id="tipi-dati"><a class="header" href="#tipi-dati">Tipi dati</a></h2>
+<table><thead><tr><th>Tipo</th><th align="center">Limiti</th><th align="center">Byte</th></tr></thead><tbody>
+<tr><td><strong>CHAR(</strong><em>n_caratteri</em><strong>)</strong></td><td align="center"><strong>0</strong> ≤ <em>n_caratteri</em> ≤ <strong>255</strong></td><td align="center"><strong>1-255</strong></td></tr>
+<tr><td><strong>VARCHAR(</strong><em>n_caratteri</em><strong>)</strong></td><td align="center"><strong>0</strong> ≤ <em>n_caratteri</em> ≤ <strong>255</strong></td><td align="center"><strong>1-255</strong></td></tr>
+<tr><td><strong>TINYINT</strong></td><td align="center"><strong>-128</strong> ≤ <em>valore</em> ≤ <strong>127</strong></td><td align="center"><strong>1</strong></td></tr>
+<tr><td><strong>INT</strong></td><td align="center"><strong>-2·10⁹</strong> ≤ <em>valore</em> ≤ <strong>2·10⁹</strong></td><td align="center"><strong>4</strong></td></tr>
+<tr><td><strong>BIGINT</strong></td><td align="center"><strong>-2·10⁶³</strong> ≤ <em>valore</em> ≤ <strong>2·10⁶³</strong></td><td align="center"><strong>8</strong></td></tr>
 </tbody></table>
-
+<h2 id="query"><a class="header" href="#query">Query</a></h2>
+<!-- <hr> -->
+<span class="font-md">
+<p><strong>SHOW DATABASES;</strong></p>
+</span>
+<span class="description">
+<p><em>Elenca tutti i database del DBMS</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">SHOW DATABASES;
+</code></pre>
+</details>
+<br>
+<span class="font-md">
+<p><strong>SHOW TABLES</strong><strong>;</strong></p>
+</span>
+<span class="description">
+<p><em>Elenca tutte le tabelle nel database</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">SHOW TABLES;
+</code></pre>
+</details>
+<br>
+<span class="font-md">
+<p><strong>USE</strong> <em>nome_database</em><strong>;</strong></p>
+</span>
+<span class="description">
+<p><em>Seleziona un database</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">USE calendario;
+</code></pre>
+<pre><code class="language-sql">USE bar;
+</code></pre>
+</details>
+<br>
+<span class="font-md">
+<p><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em><strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></p>
+</span>
+<span class="description">
+<p><em>Crea una tabella all'interno del database</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">CREATE TABLE eventi (titolo varchar(255), data int);
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
+</code></pre>
+</details>
+<br>
+<span class="font-md">
+<p><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></p>
+</span>
+<span class="description">
+<p><em>Elimina una tabella dal database</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">DROP TABLE prodotti;
+</code></pre>
+<pre><code class="language-sql">DROP TABLE utenti;
+</code></pre>
+<pre><code class="language-sql">DROP TABLE studenti;
+</code></pre>
+</details>
+<br>
+<span class="font-md">
+<p><strong>INSERT INTO</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em>, <em>nome_colonna2...</em><strong>)</strong> <strong>VALUES</strong> <strong>(</strong><em>valore</em>, <em>valore2...</em><strong>);</strong></p>
+</span>
+<span class="description">
+<p><em>Inserisce una entry (riga) nella tabella</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">INSERT INTO studenti (nome, cognome) VALUES ('Mario', 'Rossi');
+</code></pre>
+<pre><code class="language-sql">INSERT INTO targhe (targa) VALUES ('AB123CD');
+</code></pre>
+<pre><code class="language-sql">INSERT INTO prodotti (nome, costo, disponibilita) VALUES ('Acqua', 0.50);
+</code></pre>
+</details>
+<br>
+<span class="font-md">
+<p><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em><strong>;</strong></p>
+</span>
+<span class="description">
+<p><em>Seleziona (filtrando) dati da una tabella</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">SELECT nome, cognome FROM dipendenti;
+</code></pre>
+<pre><code class="language-sql">SELECT costo FROM merendine;
+</code></pre>
+<pre><code class="language-sql">SELECT * FROM video -- &quot;*&quot; significa &quot;tutte le colonne&quot;;
+</code></pre>
+</details>
+<br>
+<span class="font-md">
+<p><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em> <strong>WHERE</strong> <em>condizione</em><strong>;</strong></p>
+</span>
+<span class="description">
+<p><em>WHERE introduce una o più condizioni per filtrare le entry</em></p>
+</span>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">SELECT nome, cognome FROM cittadini WHERE regione='Lazio';
+</code></pre>
+<pre><code class="language-sql">SELECT nome, indirizzo FROM hotel WHERE costo &lt; 150.00 AND stanze_libere &gt; 2;
+</code></pre>
+<pre><code class="language-sql">SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
+</code></pre>
+</details>
+<br>	
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="playground.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -163,6 +283,9 @@
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="playground.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
