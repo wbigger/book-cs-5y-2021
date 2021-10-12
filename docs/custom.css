@@ -4,6 +4,7 @@
   margin-right: auto;
   width: 50%;
 }
+
 .w50p {
     width: 50%;
 }
@@ -34,6 +35,6 @@ iframe {
 	height: 650px;
 }
 
-p {
+/* p {
 	margin: unset;
-}
+} */

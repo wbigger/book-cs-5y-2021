@@ -213,7 +213,11 @@
 </span>
 <details closed> 
 <summary>Esempi</summary>
-<pre><code class="language-sql">CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
+<pre><code class="language-sql">CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
 </code></pre>
 </details>
 <br>
@@ -226,11 +230,7 @@
 </span>
 <details closed> 
 <summary>Esempi</summary>
-<pre><code class="language-sql">CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
-</code></pre>
-<pre><code class="language-sql">CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
-</code></pre>
-<pre><code class="language-sql">CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
+<pre><code class="language-sql">CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
 </code></pre>
 </details>
 <br>

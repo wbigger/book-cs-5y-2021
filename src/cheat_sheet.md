@@ -128,7 +128,13 @@ CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned
 <summary>Esempi</summary>
 
 ```sql
-CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
+CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
+```
+```sql
+CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
+```
+```sql
+CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
 ```
 </details>
 <br>
@@ -152,13 +158,7 @@ CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
 <summary>Esempi</summary>
 
 ```sql
-CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
-```
-```sql
-CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
-```
-```sql
-CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
+CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
 ```
 </details>
 <br>
