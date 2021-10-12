@@ -16,7 +16,7 @@ Nell'arco dei precedenti due anni, abbiamo trattato diversi casi. Di seguito una
 
 Al cuore di ogni azienda, ci sono i dati che l'azienda tratta e che sono sempre una parte fondamentale del loro business. Questi dati possono riguardare i clienti dell'azienda, i propri prodotti, i fornitori o tutte queste cose insieme. Tutti questi dati formano il **sistema informativo** dell'azienda.
 
-Da molti anni ormai questi dati sono trattati da un sistema informatico, che permette di poterli scrivere, leggere, analizzare, in generale manipolare in modo molto veloce. L'insieme dei dati di per sé viene chiamato **database** (abbreviato **DB**). Per trattare in modo efficiente, efficace e sicuro i DB sono nati dei _software_ specifici dedicati alla gestione di questi dati, che vengono chiamati quindi **Database Management System (DBMS)**. 
+Da molti anni ormai questi dati sono trattati da un **sistema informatico**, che permette di poterli scrivere, leggere, analizzare, in generale manipolare in modo molto veloce. L'insieme dei dati di per sé viene chiamato **database** (abbreviato **DB**). Per trattare in modo efficiente, efficace e sicuro i DB sono nati dei _software_ specifici dedicati alla gestione di questi dati, che vengono chiamati quindi **Database Management System (DBMS)**. 
 
 Il DBMS fa da ponte tra i dati, che fisicamente vengono salvati in un supporto *persistente* (tipicamente dei file su un hard-disk) e l'utente. 
 
@@ -48,17 +48,17 @@ show storage engines;
 
 che nel caso del nostro server restituisce il seguente output.
 
-| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |
+| Engine | Support | Comment| Transactions | XA   | Savepoints |
 |--------------------|---------|----------------------------------------------------------------|--------------|------|------------|
-| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        |
-| MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         |
-| MEMORY             | YES     | Hash based, stored in memory, useful for temporary tables      | NO           | NO   | NO         |
-| BLACKHOLE          | YES     | /dev/null storage engine (anything you write to it disappears) | NO           | NO   | NO         |
-| MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         |
-| CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         |
-| ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |
-| PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         |
-| FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |
+| InnoDB | DEFAULT | Supports transactions, row-level locking, and foreign keys | YES  | YES  | YES|
+| MRG_MYISAM | YES | Collection of identical MyISAM tables  | NO   | NO   | NO |
+| MEMORY | YES | Hash based, stored in memory, useful for temporary tables  | NO   | NO   | NO |
+| BLACKHOLE  | YES | /dev/null storage engine (anything you write to it disappears) | NO   | NO   | NO |
+| MyISAM | YES | MyISAM storage engine  | NO   | NO   | NO |
+| CSV| YES | CSV storage engine | NO   | NO   | NO |
+| ARCHIVE| YES | Archive storage engine | NO   | NO   | NO |
+| PERFORMANCE_SCHEMA | YES | Performance Schema | NO   | NO   | NO |
+| FEDERATED  | NO  | Federated MySQL storage engine | NULL | NULL | NULL   |
 
 > Nota: MEMORY è un particolare storage engine che salva i dati in memoria invece che su disco. Utile per fare prove o salvare tabelle che non devono essere persistenti, ad esempio per gestire sessioni temporanee. Da notare anche che esistono dei DBMS più specifici proprio per gestire DB in memoria, il più diffuso è Redis.
 
