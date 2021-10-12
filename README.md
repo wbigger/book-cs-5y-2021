@@ -3,7 +3,6 @@
 This site is made with **[mdBook](https://rust-lang.github.io/mdBook/)**, a command line tool and **Rust** crate to create books with Markdown. To **build** the project, run the following commands:
 ```sh
 cargo install mdbook
-cargo install mdbook-classy
 mdbook build --open
 ```
 Check the **[documentation](https://rust-lang.github.io/mdBook/cli/index.html)**
