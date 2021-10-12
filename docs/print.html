@@ -201,12 +201,8 @@
 </tbody></table>
 <h2 id="query"><a class="header" href="#query">Query</a></h2>
 <br>
-<span class="font-md">
-<p><strong>SHOW DATABASES;</strong></p>
-</span>
-<span class="description">
-<p><em>Elenca tutti i database del DBMS</em></p>
-</span>
+<p><span class="font-md"> <strong>SHOW DATABASES;</strong> </span><br />
+<span class="description"> <em>Elenca tutti i database del DBMS</em> </span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SHOW DATABASES;
@@ -214,12 +210,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>SHOW TABLES</strong><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Elenca tutte le tabelle nel database</em></p>
-</span>
+<p><span class="font-md"><strong>SHOW TABLES</strong><strong>;</strong></span><br />
+<span class="description"><em>Elenca tutte le tabelle nel database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SHOW TABLES;
@@ -227,12 +219,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>USE</strong> <em>nome_database</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Seleziona un database</em></p>
-</span>
+<p><span class="font-md"><strong>USE</strong> <em>nome_database</em><strong>;</strong></span><br />
+<span class="description"><em>Seleziona un database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">USE calendario;
@@ -242,12 +230,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em> <strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></p>
-</span>
-<span class="description">
-<p><em>Crea una tabella all'interno del database</em></p>
-</span>
+<p><span class="font-md"><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em> <strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></span><br />
+<span class="description"><em>Crea una tabella all'interno del database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">CREATE TABLE eventi (titolo varchar(255), data int);
@@ -257,12 +241,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>PRIMARY KEY</strong></p>
-</span>
-<span class="description">
-<p><em>Indica una o più colonne che identificano in modo univoco una riga</em></p>
-</span>
+<p><span class="font-md"><strong>PRIMARY KEY</strong></span><br />
+<span class="description"><em>Indica una o più colonne che identificano in modo univoco una riga</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
@@ -274,12 +254,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>AUTO_INCREMENT</strong></p>
-</span>
-<span class="description">
-<p><em>Incrementa il valore di una colonna ogni volta che viene aggiunta una riga</em></p>
-</span>
+<p><span class="font-md"><strong>AUTO_INCREMENT</strong></span><br />
+<span class="description"><em>Incrementa il valore di una colonna ogni volta che viene aggiunta una riga</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
@@ -287,12 +263,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Elimina una tabella dal database</em></p>
-</span>
+<p><span class="font-md"><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></span><br />
+<span class="description"><em>Elimina una tabella dal database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">DROP TABLE prodotti;
@@ -304,12 +276,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>INSERT INTO</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em>, <em>nome_colonna2...</em><strong>)</strong> <strong>VALUES</strong> <strong>(</strong><em>valore</em>, <em>valore2...</em><strong>);</strong></p>
-</span>
-<span class="description">
-<p><em>Inserisce una entry (riga) nella tabella</em></p>
-</span>
+<p><span class="font-md"><strong>INSERT INTO</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em>, <em>nome_colonna2...</em><strong>)</strong> <strong>VALUES</strong> <strong>(</strong><em>valore</em>, <em>valore2...</em><strong>);</strong></span><br />
+<span class="description"><em>Inserisce una entry (riga) nella tabella</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">INSERT INTO studenti (nome, cognome) VALUES ('Mario', 'Rossi');
@@ -321,12 +289,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Seleziona (filtrando) dati da una tabella</em></p>
-</span>
+<p><span class="font-md"><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em><strong>;</strong></span><br />
+<span class="description"><em>Seleziona (filtrando) dati da una tabella</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SELECT nome, cognome FROM dipendenti;
@@ -338,12 +302,8 @@
 </details>
 <br>
 <br>
-<span class="font-md">
-<p><strong>WHERE</strong> <em>condizione</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>WHERE introduce una o più condizioni per filtrare le entry</em></p>
-</span>
+<p><span class="font-md"><strong>WHERE</strong> <em>condizione</em><strong>;</strong></span><br />
+<span class="description"><em>WHERE introduce una o più condizioni per filtrare le entry</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SELECT nome, cognome FROM cittadini WHERE regione='Lazio';
