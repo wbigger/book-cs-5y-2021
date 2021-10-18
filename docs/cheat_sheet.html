@@ -263,6 +263,28 @@
 </details>
 <br>	
 <br>
+<p><span class="font-md"><strong>ALTER TABLE</strong> <em>nome_tabella</em> <strong>RENAME TO</strong> <em>nuovo_nome_tabella</em><strong>;</strong></span><br />
+<span class="description"><em>Cambia il nome di una tabella</em></span></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">ALTER TABLE utenti RENAME studenti;
+</code></pre>
+<pre><code class="language-sql">ALTER TABLE ata RENAME personale_ata ;
+</code></pre>
+</details>
+<br>	
+<br>
+<p><span class="font-md"><strong>RENAME TABLE</strong> <em>nome_tabella</em> <strong>TO</strong> <em>nuovo_nome_tabella</em><strong>,</strong> <em>nome_tabella_2</em> <strong>TO</strong> <em>nuovo_nome</em> etc...<strong>;</strong></span><br />
+<span class="description"><em>Cambia il nome di una o più tabelle (funziona solo in MySQL)</em></span></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">RENAME TABLE utenti TO professori;
+</code></pre>
+<pre><code class="language-sql">RENAME TABLE ny_times TO pubblicazioni_ny_times, the_guardian TO pubblicazioni_the_guardian;
+</code></pre>
+</details>
+<br>	
+<br>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -283,20 +305,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
