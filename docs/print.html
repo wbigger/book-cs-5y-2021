@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="playground.html"><strong aria-hidden="true">3.</strong> Playground</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -200,37 +200,27 @@
 <tr><td><strong>BIGINT</strong></td><td align="center"><strong>-2·10⁶³</strong> ≤ <em>valore</em> ≤ <strong>2·10⁶³</strong></td><td align="center"><strong>8</strong></td></tr>
 </tbody></table>
 <h2 id="query"><a class="header" href="#query">Query</a></h2>
-<!-- <hr> -->
-<span class="font-md">
-<p><strong>SHOW DATABASES;</strong></p>
-</span>
-<span class="description">
-<p><em>Elenca tutti i database del DBMS</em></p>
-</span>
+<br>
+<p><span class="font-md"> <strong>SHOW DATABASES;</strong> </span><br />
+<span class="description"> <em>Elenca tutti i database del DBMS</em> </span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SHOW DATABASES;
 </code></pre>
 </details>
 <br>
-<span class="font-md">
-<p><strong>SHOW TABLES</strong><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Elenca tutte le tabelle nel database</em></p>
-</span>
+<br>
+<p><span class="font-md"><strong>SHOW TABLES</strong><strong>;</strong></span><br />
+<span class="description"><em>Elenca tutte le tabelle nel database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SHOW TABLES;
 </code></pre>
 </details>
 <br>
-<span class="font-md">
-<p><strong>USE</strong> <em>nome_database</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Seleziona un database</em></p>
-</span>
+<br>
+<p><span class="font-md"><strong>USE</strong> <em>nome_database</em><strong>;</strong></span><br />
+<span class="description"><em>Seleziona un database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">USE calendario;
@@ -239,12 +229,9 @@
 </code></pre>
 </details>
 <br>
-<span class="font-md">
-<p><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em><strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></p>
-</span>
-<span class="description">
-<p><em>Crea una tabella all'interno del database</em></p>
-</span>
+<br>
+<p><span class="font-md"><strong>CREATE TABLE</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em> <em>tipo</em> <strong>,</strong> <em>nome_colonna2</em> <em>tipo</em><strong>);</strong></span><br />
+<span class="description"><em>Crea una tabella all'interno del database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">CREATE TABLE eventi (titolo varchar(255), data int);
@@ -253,12 +240,31 @@
 </code></pre>
 </details>
 <br>
-<span class="font-md">
-<p><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Elimina una tabella dal database</em></p>
-</span>
+<br>
+<p><span class="font-md"><strong>PRIMARY KEY</strong></span><br />
+<span class="description"><em>Indica una o più colonne che identificano in modo univoco una riga</em></span></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
+</code></pre>
+<pre><code class="language-sql">CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
+</code></pre>
+</details>
+<br>
+<br>
+<p><span class="font-md"><strong>AUTO_INCREMENT</strong></span><br />
+<span class="description"><em>Incrementa il valore di una colonna ogni volta che viene aggiunta una riga</em></span></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
+</code></pre>
+</details>
+<br>
+<br>
+<p><span class="font-md"><strong>DROP TABLE</strong> <em>nome_tabella</em><strong>;</strong></span><br />
+<span class="description"><em>Elimina una tabella dal database</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">DROP TABLE prodotti;
@@ -269,12 +275,9 @@
 </code></pre>
 </details>
 <br>
-<span class="font-md">
-<p><strong>INSERT INTO</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em>, <em>nome_colonna2...</em><strong>)</strong> <strong>VALUES</strong> <strong>(</strong><em>valore</em>, <em>valore2...</em><strong>);</strong></p>
-</span>
-<span class="description">
-<p><em>Inserisce una entry (riga) nella tabella</em></p>
-</span>
+<br>
+<p><span class="font-md"><strong>INSERT INTO</strong> <em>nome_tabella</em> <strong>(</strong><em>nome_colonna</em>, <em>nome_colonna2...</em><strong>)</strong> <strong>VALUES</strong> <strong>(</strong><em>valore</em>, <em>valore2...</em><strong>);</strong></span><br />
+<span class="description"><em>Inserisce una entry (riga) nella tabella</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">INSERT INTO studenti (nome, cognome) VALUES ('Mario', 'Rossi');
@@ -285,12 +288,9 @@
 </code></pre>
 </details>
 <br>
-<span class="font-md">
-<p><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>Seleziona (filtrando) dati da una tabella</em></p>
-</span>
+<br>
+<p><span class="font-md"><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em><strong>;</strong></span><br />
+<span class="description"><em>Seleziona (filtrando) dati da una tabella</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SELECT nome, cognome FROM dipendenti;
@@ -301,12 +301,9 @@
 </code></pre>
 </details>
 <br>
-<span class="font-md">
-<p><strong>SELECT</strong> <em>nome_colonna</em>, <em>nome_colonna2...</em> <strong>FROM</strong> <em>nome_tabella</em> <strong>WHERE</strong> <em>condizione</em><strong>;</strong></p>
-</span>
-<span class="description">
-<p><em>WHERE introduce una o più condizioni per filtrare le entry</em></p>
-</span>
+<br>
+<p><span class="font-md"><strong>WHERE</strong> <em>condizione</em><strong>;</strong></span><br />
+<span class="description"><em>WHERE introduce una o più condizioni per filtrare le entry</em></span></p>
 <details closed> 
 <summary>Esempi</summary>
 <pre><code class="language-sql">SELECT nome, cognome FROM cittadini WHERE regione='Lazio';
@@ -316,9 +313,8 @@
 <pre><code class="language-sql">SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
 </code></pre>
 </details>
-<br>	<div style="break-before: page; page-break-before: always;"></div><h1 id="playground"><a class="header" href="#playground">Playground</a></h1>
-<iframe src="https://www.db-fiddle.com/" frameborder="0">
-</iframe>
+<br>	
+<br>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

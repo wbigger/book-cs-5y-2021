@@ -11,19 +11,11 @@
 | __BIGINT__ | __-2·10⁶³__ ≤ *valore* ≤ __2·10⁶³__ | __8__ | 
 
 ## Query
-<!-- <hr> -->
-<span class="font-md">
 
-**SHOW DATABASES;**
+<br>
 
-</span>
-
-<span class="description">
-
-*Elenca tutti i database del DBMS*
-
-</span>
-
+<span class="font-md"> **SHOW DATABASES;** </span>\
+<span class="description"> *Elenca tutti i database del DBMS* </span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -32,20 +24,11 @@ SHOW DATABASES;
 ```
 </details>
 <br>
+<br>
 
 
-<span class="font-md">
-
-**SHOW TABLES**__;__
-
-</span>
-
-<span class="description">
-
-*Elenca tutte le tabelle nel database*
-
-</span>
-
+<span class="font-md">**SHOW TABLES**__;__</span>\
+<span class="description">*Elenca tutte le tabelle nel database*</span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -54,20 +37,11 @@ SHOW TABLES;
 ```
 </details>
 <br>
+<br>
 
 
-<span class="font-md">
-
-**USE** *nome_database*__;__
-
-</span>
-
-<span class="description">
-
-*Seleziona un database*
-
-</span>
-
+<span class="font-md">**USE** *nome_database*__;__</span>\
+<span class="description">*Seleziona un database*</span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -79,20 +53,11 @@ USE bar;
 ```
 </details>
 <br>
+<br>
 
 
-<span class="font-md">
-
-**CREATE TABLE** *nome_tabella* __(__*nome_colonna* *tipo*__,__ *nome_colonna2* *tipo*__);__
-
-</span>
-
-<span class="description">
-
-*Crea una tabella all'interno del database*
-
-</span>
-
+<span class="font-md">**CREATE TABLE** *nome_tabella* __(__*nome_colonna* *tipo* __,__ *nome_colonna2* *tipo*__);__</span>\
+<span class="description">*Crea una tabella all'interno del database*</span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -104,20 +69,43 @@ CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned
 ```
 </details>
 <br>
+<br>
 
 
-<span class="font-md">
+<span class="font-md">**PRIMARY KEY**</span>\
+<span class="description">*Indica una o più colonne che identificano in modo univoco una riga*</span>
+<details closed> 
+<summary>Esempi</summary>
 
-**DROP TABLE** *nome_tabella*__;__
+```sql
+CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
+```
+```sql
+CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
+```
+```sql
+CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
+```
+</details>
+<br>
+<br>
 
-</span>
 
-<span class="description">
+<span class="font-md">**AUTO_INCREMENT**</span>\
+<span class="description">*Incrementa il valore di una colonna ogni volta che viene aggiunta una riga*</span>
+<details closed> 
+<summary>Esempi</summary>
 
-*Elimina una tabella dal database*
+```sql
+CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
+```
+</details>
+<br>
+<br>
 
-</span>
 
+<span class="font-md">**DROP TABLE** *nome_tabella*__;__</span>\
+<span class="description">*Elimina una tabella dal database*</span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -132,20 +120,11 @@ DROP TABLE studenti;
 ```
 </details>
 <br>
+<br>
 
 
-<span class="font-md">
-
-**INSERT INTO** *nome_tabella* __(__*nome_colonna*, *nome_colonna2...*__)__ **VALUES** __(__*valore*, *valore2...*__);__
-
-</span>
-
-<span class="description">
-
-*Inserisce una entry (riga) nella tabella*
-
-</span>
-
+<span class="font-md">**INSERT INTO** *nome_tabella* __(__*nome_colonna*, *nome_colonna2...*__)__ **VALUES** __(__*valore*, *valore2...*__);__</span>\
+<span class="description">*Inserisce una entry (riga) nella tabella*</span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -160,20 +139,11 @@ INSERT INTO prodotti (nome, costo, disponibilita) VALUES ('Acqua', 0.50);
 ```
 </details>
 <br>
+<br>
 
 
-<span class="font-md">
-
-**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella*__;__
-
-</span>
-
-<span class="description">
-
-*Seleziona (filtrando) dati da una tabella*
-
-</span>
-
+<span class="font-md">**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella*__;__</span>\
+<span class="description">*Seleziona (filtrando) dati da una tabella*</span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -188,20 +158,11 @@ SELECT * FROM video -- "*" significa "tutte le colonne";
 ```
 </details>
 <br>
+<br>
 
 
-<span class="font-md">
-
-**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella* **WHERE** *condizione*__;__
-
-</span>
-
-<span class="description">
-
-*WHERE introduce una o più condizioni per filtrare le entry*
-
-</span>
-
+<span class="font-md">**WHERE** *condizione*__;__</span>\
+<span class="description">*WHERE introduce una o più condizioni per filtrare le entry*</span>
 <details closed> 
 <summary>Esempi</summary>
 
@@ -216,3 +177,4 @@ SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
 ```
 </details>
 <br>	
+<br>

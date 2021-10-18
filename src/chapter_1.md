@@ -1,6 +1,7 @@
 # Introduzione ai database
 
 Come abbiamo visto gli anni precedenti, in qualsiasi sistema di elaborazione trattiamo, sia esso hardware, software o una combinazione dei due, possiamo sempre individuare due componenti distinti con ruoli differenti:
+
 1. conservazione dei dati
 2. manipolazione dei dati
 
@@ -10,7 +11,6 @@ Nell'arco dei precedenti due anni, abbiamo trattato diversi casi. Di seguito una
 |---|---|---|---|---|
 | Dati | RAM/Hard Disk | files, database | strutture dati | database server |
 | Manipolazione | CPU | processi, applicazioni | funzioni | application server, clients |
-
 
 # DBMS
 
