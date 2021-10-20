@@ -178,3 +178,35 @@ SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
 </details>
 <br>	
 <br>
+
+
+<span class="font-md">**ALTER TABLE** *nome_tabella* **RENAME TO** *nuovo_nome_tabella*__;__</span>\
+<span class="description">*Cambia il nome di una tabella*</span>
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+ALTER TABLE utenti RENAME studenti;
+```
+```sql
+ALTER TABLE ata RENAME personale_ata ;
+```
+</details>
+<br>	
+<br>
+
+
+<span class="font-md">**RENAME TABLE** *nome_tabella* **TO** *nuovo_nome_tabella*__,__ *nome_tabella_2* **TO** *nuovo_nome* etc...__;__</span>\
+<span class="description">*Cambia il nome di una o più tabelle (funziona solo in MySQL)*</span>
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+RENAME TABLE utenti TO professori;
+```
+```sql
+RENAME TABLE ny_times TO pubblicazioni_ny_times, the_guardian TO pubblicazioni_the_guardian;
+```
+</details>
+<br>	
+<br>

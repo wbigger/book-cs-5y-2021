@@ -152,7 +152,7 @@
 </tbody></table>
 <h1 id="dbms"><a class="header" href="#dbms">DBMS</a></h1>
 <p>Al cuore di ogni azienda, ci sono i dati che l'azienda tratta e che sono sempre una parte fondamentale del loro business. Questi dati possono riguardare i clienti dell'azienda, i propri prodotti, i fornitori o tutte queste cose insieme. Tutti questi dati formano il <strong>sistema informativo</strong> dell'azienda.</p>
-<p>Da molti anni ormai questi dati sono trattati da un sistema informatico, che permette di poterli scrivere, leggere, analizzare, in generale manipolare in modo molto veloce. L'insieme dei dati di per sé viene chiamato <strong>database</strong> (abbreviato <strong>DB</strong>). Per trattare in modo efficiente, efficace e sicuro i DB sono nati dei <em>software</em> specifici dedicati alla gestione di questi dati, che vengono chiamati quindi <strong>Database Management System (DBMS)</strong>. </p>
+<p>Da molti anni ormai questi dati sono trattati da un <strong>sistema informatico</strong>, che permette di poterli scrivere, leggere, analizzare, in generale manipolare in modo molto veloce. L'insieme dei dati di per sé viene chiamato <strong>database</strong> (abbreviato <strong>DB</strong>). Per trattare in modo efficiente, efficace e sicuro i DB sono nati dei <em>software</em> specifici dedicati alla gestione di questi dati, che vengono chiamati quindi <strong>Database Management System (DBMS)</strong>. </p>
 <p>Il DBMS fa da ponte tra i dati, che fisicamente vengono salvati in un supporto <em>persistente</em> (tipicamente dei file su un hard-disk) e l'utente. </p>
 <!-- DB01 (DBMS) -->
 <p class="center">
@@ -315,6 +315,28 @@
 </details>
 <br>	
 <br>
+<p><span class="font-md"><strong>ALTER TABLE</strong> <em>nome_tabella</em> <strong>RENAME TO</strong> <em>nuovo_nome_tabella</em><strong>;</strong></span><br />
+<span class="description"><em>Cambia il nome di una tabella</em></span></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">ALTER TABLE utenti RENAME studenti;
+</code></pre>
+<pre><code class="language-sql">ALTER TABLE ata RENAME personale_ata ;
+</code></pre>
+</details>
+<br>	
+<br>
+<p><span class="font-md"><strong>RENAME TABLE</strong> <em>nome_tabella</em> <strong>TO</strong> <em>nuovo_nome_tabella</em><strong>,</strong> <em>nome_tabella_2</em> <strong>TO</strong> <em>nuovo_nome</em> etc...<strong>;</strong></span><br />
+<span class="description"><em>Cambia il nome di una o più tabelle (funziona solo in MySQL)</em></span></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">RENAME TABLE utenti TO professori;
+</code></pre>
+<pre><code class="language-sql">RENAME TABLE ny_times TO pubblicazioni_ny_times, the_guardian TO pubblicazioni_the_guardian;
+</code></pre>
+</details>
+<br>	
+<br>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -329,20 +351,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
