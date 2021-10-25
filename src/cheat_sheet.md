@@ -10,7 +10,11 @@
 | __INT__ | __-2·10⁹__ ≤ *valore* ≤ __2·10⁹__ | __4__ | 
 | __BIGINT__ | __-2·10⁶³__ ≤ *valore* ≤ __2·10⁶³__ | __8__ | 
 
-## Query
+## Data Definition Language (DDL)
+Il Data Definition Language (DDL) è la parte del linguaggio SQL che si occupa di creare, modificare o eliminare elementi nella _schema logico_ del database. In altre parole, contiene i comandi per creare o modificare databases e tabelle. Le parole chiave usate nel DDL sono:
+- __CREATE__ per creare elementi
+- __ALTER__ per modificare elementi
+- __DROP__ per eliminare elementi
 
 <br>
 
@@ -122,6 +126,11 @@ DROP TABLE studenti;
 <br>
 <br>
 
+## Data Manipulation Language
+Il Data Manipulation Language (DML) è la parte del linguaggio SQL che serve per modificare, aggiornare e cancellare il _contenuto_ delle tabelle, senza alternarne però lo schema logico. Si compone prevalentemente di:
+- __INSERT__ per inserire una nuova riga in una tabella
+- __UPDATE__ per aggiornare una o più colonne di una riga
+- __DELETE__ per cancellare una o più righe
 
 <span class="font-md">**INSERT INTO** *nome_tabella* __(__*nome_colonna*, *nome_colonna2...*__)__ **VALUES** __(__*valore*, *valore2...*__);__</span>\
 <span class="description">*Inserisce una entry (riga) nella tabella*</span>
@@ -141,6 +150,8 @@ INSERT INTO prodotti (nome, costo, disponibilita) VALUES ('Acqua', 0.50);
 <br>
 <br>
 
+## Data Query Language
+Il Data Query Language (DQL) è la parte del linguaggio SQL che serve per interrogare il database. Si compone essenzialmente del comando __SELECT__ con tutte le sue diverse forme e clausole.
 
 <span class="font-md">**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella*__;__</span>\
 <span class="description">*Seleziona (filtrando) dati da una tabella*</span>
@@ -156,10 +167,10 @@ SELECT costo FROM merendine;
 ```sql
 SELECT * FROM video -- "*" significa "tutte le colonne";
 ```
+L'asterisco (_star_ in inglese) è da usare esclusivamente in fase di debug o nei rari casi in cui serva effettivamente avere tutte le colonne per eseguire qualche tipo di indagine. Nella pratica, in un'applicazione bisogna sempre selezionare le colonne che poi effettivamente saranno usate nel resto del codice, per aumentare le prestazioni ed evitare errori di vario genere.
 </details>
 <br>
 <br>
-
 
 <span class="font-md">**WHERE** *condizione*__;__</span>\
 <span class="description">*WHERE introduce una o più condizioni per filtrare le entry*</span>
@@ -176,5 +187,6 @@ SELECT nome, indirizzo FROM hotel WHERE costo < 150.00 AND stanze_libere > 2;
 SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
 ```
 </details>
-<br>	
-<br>
+
+
+<!-- Aggiungere: JOIN,  -->
