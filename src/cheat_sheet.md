@@ -4,11 +4,11 @@
 
 | Tipo | Limiti | Byte |
 |-|:-:|:-:| 
-| __CHAR(__*n_caratteri*__)__ | __0__ ≤ *n_caratteri* ≤ __255__ | __1-255__ |
-| __VARCHAR(__*n_caratteri*__)__ | __0__ ≤ *n_caratteri* ≤ __255__ | __1-255__ |
-| __TINYINT__ | __-128__ ≤ *valore* ≤ __127__ | __1__ | 
-| __INT__ | __-2·10⁹__ ≤ *valore* ≤ __2·10⁹__ | __4__ | 
-| __BIGINT__ | __-2·10⁶³__ ≤ *valore* ≤ __2·10⁶³__ | __8__ | 
+| __char(__*n_caratteri*__)__ | __0__ ≤ *n_caratteri* ≤ __255__ | __1-255__ |
+| __varchar(__*n_caratteri*__)__ | __0__ ≤ *n_caratteri* ≤ __255__ | __1-255__ |
+| __tinyint__ | __-128__ ≤ *valore* ≤ __127__ | __1__ | 
+| __int__ | __-2·10⁹__ ≤ *valore* ≤ __2·10⁹__ | __4__ | 
+| __bigint__ | __-2·10⁶³__ ≤ *valore* ≤ __2·10⁶³__ | __8__ | 
 
 ## Nota sulle lettere maiuscole e minuscole
 Il linguaggio SQL non fa distinzione tra maiuscole e minuscole. Questo ha portato a diversi stili di scrittura dei comandi, tutti sintatticamente validi. 
@@ -19,149 +19,170 @@ Chi usa le lettere minuscole lo ritiene più in linea con la sintassi degli attu
 
 Personalmente preferisco usare le lettere minuscole, ma se usate le maiuscole va bene lo stesso. L'importante è che presa una scelta, siate coerenti con la scelta fatta (almeno all'interno della stessa query!!).
 
+## Convenzioni sui nomi
+Seguiamo le seguenti convenzioni:
+- per i nomi delle tabelle, usiamo il plurale (es. `utenti`)
+- se possibile, per le tabelle usare un nome collettivo (es. `personale` invece di `dipendenti`)
+- per i nomi delle colonne, usiamo il singolare (es. `nome`)
+- per le chiavi primarie, usiamo il nome della tabella al singolare seguito da `_id` (es. `utente_id`)
+
 
 ## Data Definition Language (DDL)
 Il Data Definition Language (DDL) è la parte del linguaggio SQL che si occupa di creare, modificare o eliminare elementi nella _schema logico_ del database. In altre parole, contiene i comandi per creare o modificare databases e tabelle. Le parole chiave usate nel DDL sono:
-- __CREATE__ per creare elementi
-- __ALTER__ per modificare elementi
-- __DROP__ per eliminare elementi
-
+- __create__ per creare elementi
+- __alter__ per modificare elementi
+- __drop__ per eliminare elementi
 
 ###
-**SHOW DATABASES;**<br>
+**show databases;**<br>
 *Elenca tutti i database del DBMS*
 
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-SHOW DATABASES;
+show databases;
 ```
 </details>
 
 
 ###
-**SHOW TABLES;**<br>
+**show tables;**<br>
 *Elenca tutte le tabelle nel database*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-SHOW TABLES;
+show tables;
 ```
 </details>
 
 ###
-**USE** _nome_database_**;**<br>
+**use** _nome_database_**;**<br>
 *Seleziona un database*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-USE calendario;
+use calendario;
 ```
 ```sql
-USE bar;
+use bar;
 ```
 </details>
 
 
 
-###
-**CREATE TABLE** *nome_tabella* __(__*nome_colonna* *tipo* __,__ *nome_colonna2* *tipo*__);__<br>
+### CREATE
+**create table** *nome_tabella* __(__*nome_colonna* *tipo* __,__ *nome_colonna2* *tipo*__);__<br>
 *Crea una tabella all'interno del database*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-CREATE TABLE eventi (titolo varchar(255), data int);
+create table eventi (titolo varchar(255), data int);
 ```
 ```sql
-CREATE TABLE studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
+create table studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
 ```
 </details>
 
 ###
-**PRIMARY KEY**<br>
-*Indica una o più colonne che identificano in modo univoco una riga*
+**primary key**<br>
+*Indica una o più colonne che identificano in modo univoco una riga. In italiano: chiave primaria.*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-CREATE TABLE cittadini (codicefiscale char(16) PRIMARY KEY, nome varchar(255));
+create table cittadini (codice_fiscale char(16) primary key, nome varchar(255));
 ```
 ```sql
-CREATE TABLE utenti (username varchar(50) PRIMARY KEY, password varchar(255));
+create table utenti (username varchar(50) primary key, password varchar(255));
 ```
 ```sql
-CREATE TABLE telefoni (modello char(10) PRIMARY KEY, disponibilita int);
+create table telefoni (modello char(10) primary key, disponibilita int);
 ```
 </details>
 
-
-
-
 ###
-**AUTO_INCREMENT**<br>
+**auto_increment**<br>
 *Incrementa il valore di una colonna ogni volta che viene aggiunta una riga*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-CREATE TABLE prodotti (id int PRIMARY KEY AUTO_INCREMENT, nome varchar(255));
+create table prodotti (id int primary key auto_increment, nome varchar(255));
 ```
 </details>
 
 
-
-
 ###
+**foreign key** <br>
+*Crea un riferimento ad una chiave primaria di un'altra tabella. In italiano: chiave esterna.*
+
+Spesso le tabelle hanno dei riferimenti le une con le altre. Pensiamo ad esempio alle tabelle "eventi" e "utenti". Ogni evento ha un organizzatore (uno solo), quindi vorremmo poter inserire questa informazione nel nostro database. Per fare questa operazione abbiamo bisogno di una chiave esterna.
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+create table eventi (
+    titolo varchar(100),
+    evento_id int auto_increment,
+    organizzatore int,
+    foreign key (organizzatore) references utenti(utente_id)
+);
+```
+Nel momento in cui si inserisce un nuovo evento, il DBMS controlla che l'organizzatore sia un utente esistente; in caso contrario rifiuta l'inserimento.
+</details>
+
+### DROP
 **DROP TABLE** *nome_tabella*__;__<br>
 *Elimina una tabella dal database*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-DROP TABLE prodotti;
+drop table prodotti;
 ```
 ```sql
-DROP TABLE utenti;
+drop table utenti;
 ```
 ```sql
-DROP TABLE studenti;
+drop table studenti;
 ```
 </details>
 
 
 
-###
-**ALTER TABLE** *nome_tabella* **RENAME TO** *nuovo_nome_tabella*__;__<br>
+### ALTER
+**alter table** *nome_tabella* **rename to** *nuovo_nome_tabella*__;__<br>
 *Cambia il nome di una tabella*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-ALTER TABLE utenti RENAME studenti;
+alter table utenti rename studenti;
 ```
 ```sql
-ALTER TABLE ata RENAME personale_ata ;
+alter table ata rename personale_ata ;
 ```
 </details>
 	
 
 
 
-###
-**RENAME TABLE** *nome_tabella* **TO** *nuovo_nome_tabella*__,__ *nome_tabella_2* **TO** *nuovo_nome* etc...__;__<br>
+### RENAME
+**rename table** *nome_tabella* **to** *nuovo_nome_tabella*__,__ *nome_tabella_2* **to** *nuovo_nome* etc...__;__<br>
 *Cambia il nome di una o più tabelle (funziona solo in MySQL)*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-RENAME TABLE utenti TO professori;
+rename table utenti to professori;
 ```
 ```sql
-RENAME TABLE ny_times TO pubblicazioni_ny_times, the_guardian TO pubblicazioni_the_guardian;
+rename table ny_times to pubblicazioni_ny_times, the_guardian to pubblicazioni_the_guardian;
 ```
 </details>
 	
@@ -169,87 +190,175 @@ RENAME TABLE ny_times TO pubblicazioni_ny_times, the_guardian TO pubblicazioni_t
 
 ## Data Manipulation Language
 Il Data Manipulation Language (DML) è la parte del linguaggio SQL che serve per modificare, aggiornare e cancellare il _contenuto_ delle tabelle, senza alternarne però lo schema logico. Si compone prevalentemente di:
-- __INSERT__ per inserire una nuova riga in una tabella
-- __UPDATE__ per aggiornare una o più colonne di una riga
-- __DELETE__ per cancellare una o più righe
+- __insert__ per inserire una nuova riga in una tabella
+- __update__ per aggiornare una o più colonne di una riga
+- __delete__ per cancellare una o più righe
 
-###
-**INSERT INTO** *nome_tabella* __(__*nome_colonna*, *nome_colonna2...*__)__ **VALUES** __(__*valore*, *valore2...*__);__<br>
+### INSERT
+**insert into** *nome_tabella* __(__*nome_colonna*, *nome_colonna2...*__)__ **values** __(__*valore*, *valore2...*__);__<br>
 *Inserisce una riga nella tabella*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-INSERT INTO studenti (nome, cognome) VALUES ('Mario', 'Rossi');
+insert into studenti (nome, cognome) values ('mario', 'rossi');
 ```
 ```sql
-INSERT INTO targhe (targa) VALUES ('AB123CD');
+insert into targhe (targa) values ('ab123cd');
 ```
 ```sql
-INSERT INTO prodotti (nome, costo, disponibilita) VALUES ('Acqua', 0.50);
-```
-</details>
-
-
-
-###
-**UPDATE** *nome_tabella* **SET** __(__*nome_colonna* = *valore*, *nome_colonna2* = *valore*, *...*__)__ **WHERE** *condizione*;<br>
-*Modifica una riga o più righe nella tabella*
-<details closed> 
-<summary>Esempi</summary>
-
-```sql
-UPDATE studenti SET (nome='Claudio') WHERE cognome='Rossi';
+insert into prodotti (nome, costo, disponibilita) values ('acqua', 0.50);
 ```
 </details>
 
-###
-**DELETE** FROM *nome_tabella* **WHERE** *condizione*;<br>
-*Elimina una o più righe nella tabella*
+
+
+### UPDATE
+**update** *nome_tabella* **set** __(__*nome_colonna* = *valore*, *nome_colonna2* = *valore*, *...*__)__ **where** *condizione*;<br>
+*modifica una riga o più righe nella tabella*
 <details closed> 
-<summary>Esempi</summary>
+<summary>esempi</summary>
 
 ```sql
-DELETE FROM studenti WHERE cognome='Rossi';
+update studenti set (nome='claudio') where cognome='rossi';
+```
+</details>
+
+### DELETE
+**delete from** *nome_tabella* **where** *condizione*;<br>
+*elimina una o più righe nella tabella*
+<details closed> 
+<summary>esempi</summary>
+
+```sql
+delete from studenti where cognome='rossi';
 ```
 </details>
 
 
 ## Data Query Language
-Il Data Query Language (DQL) è la parte del linguaggio SQL che serve per interrogare il database. Si compone essenzialmente del comando __SELECT__ con tutte le sue diverse forme e clausole.
+Il Data Query Language (DQL) è la parte del linguaggio SQL che serve per interrogare il database. Si compone essenzialmente del comando __select__ con tutte le sue diverse forme e clausole.
 
-###
-**SELECT** *nome_colonna*, *nome_colonna2...* **FROM** *nome_tabella*__;__<br>
+### SELECT
+**select** *nome_colonna*, *nome_colonna2...* **from** *nome_tabella*__;__<br>
 *Seleziona (filtrando) dati da una tabella*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-SELECT nome, cognome FROM dipendenti;
+select nome, cognome from dipendenti;
 ```
 ```sql
-SELECT costo FROM merendine;
+select costo from merendine;
 ```
 ```sql
-SELECT * FROM video -- "*" significa "tutte le colonne";
+select * from video -- "*" significa "tutte le colonne";
 ```
 L'asterisco (_star_ in inglese) è da usare esclusivamente in fase di debug o nei rari casi in cui serva effettivamente avere tutte le colonne per eseguire qualche tipo di indagine. Nella pratica, in un'applicazione bisogna sempre selezionare le colonne che poi effettivamente saranno usate nel resto del codice, per aumentare le prestazioni ed evitare errori di vario genere.
 </details>
 
-###
-**WHERE** *condizione*__;__<br>
-*WHERE introduce una o più condizioni per filtrare le righe*
+### WHERE
+**where** *condizione*__;__<br>
+*where introduce una o più condizioni per filtrare le righe*
 <details closed> 
 <summary>Esempi</summary>
 
 ```sql
-SELECT nome, cognome FROM cittadini WHERE regione='Lazio';
+select nome, cognome from cittadini where regione='lazio';
 ```
 ```sql
-SELECT nome, indirizzo FROM hotel WHERE costo < 150.00 AND stanze_libere > 2;
+select nome, indirizzo from hotel where costo < 150.00 and stanze_libere > 2;
 ```
 ```sql
-SELECT nome, iban FROM libri WHERE review BETWEEN 3 AND 5;
+select nome, iban from libri where review between 3 and 5;
 ```
 </details>
 	
+### ORDER BY
+**order by** *colonna1,colonna2,...* [asc|desc]__;__<br>
+*order by ordina i risultati in base ad una colonna; si possono ordinare i risultati in ordine crescente (`asc`, default) o decrescente (`desc`). si possono specificare più colonne in sequenza, in questo caso ordinerà prima per la colonna1, poi per la colonna2, etc.
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+select nome, cognome
+from cittadini
+order by cognome;
+```
+```sql
+select nome, cognome
+from cittadini
+order by cognome,nome,età desc;
+```
+</details>
+
+### JOIN
+Finora abbiamo trattato interrogazioni con una sola tabella. Molto spesso, tuttavia, serve fare interrogazioni su più tabelle contemporaneamente. Riprendiamo l'esempio della tabella `eventi` e la tabella `utenti`, e che ogni evento abbia esattamente un organizzatore. 
+
+Per fare interrogazioni su più tabelle, si usa la clausola **join**.
+
+Vediamo come si legge un'interrogazione con la join. Si comincia sempre con il comando **select**. Dopo aver specificato come al solito le colonne che si vogliono selezionare, usiamo:
+1. la clausola **from** con **la tabella che contiene la chiave esterna**
+2. quindi aggiungiamo la clausola **join** con **la tabella a cui fa riferimento la chiave esterna**
+3. aggiungiamo infine la keyword **on** con la condizione sulle chiavi che si vogliono unire
+
+Quando usiamo colonne da più tabelle, è bene specificare sempre anche la tabella quando richiamiamo una colonna, usando la notazione punto, ad esempio `eventi.organizzatore`.
+
+> Tecnicamente, se non ci sono conflitti tra i nomi delle colonne, non sarebbe necessario specificare la tabella; tuttavia è una buona pratica diffusa e consolidata specificare sempre la tabella.
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+select eventi.titolo, utenti.nome, utenti.cognome
+from eventi
+join utenti on eventi.organizzatore=utenti.utente_id;
+```
+
+La clausola `join` può essere usata insieme alle clausole `where` o `order by` per filtrare ed organizzare ulteriormente i risultati.
+
+```sql
+select eventi.titolo, eventi.costo, utenti.nome, utenti.cognome
+from eventi
+join utenti on eventi.organizzatore=utenti.utente_id
+where eventi.costo > 0
+order by utenti.cognome asc;
+```
+</details>
+
+### AS
+Come si può intuire dalle ultime query, le richieste complesse possono diventare anche molto lunghe. Per questo motivo è possibile abbreviare i nomi delle tabelle o delle colonne con il comando `as`.
+
+Attenzione ad alcune cose in particolare:
+- a volte l'alias viene utilizzato prima di essere definito, questo può sembrare contro-intuitivo ma è il comportamento normale
+- per convenzione, l'alias delle tabelle è il primo carattere della tabella; se ci dovessero essere più tabelle che iniziano con lo stesso nome, si possono usare le prime due lettere oppure un numero incrementale (es. `s1`,`s2`, etc.)
+
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+-- comando as per rinominare le tabelle
+select e.titolo, e.costo, u.nome, u.cognome
+from eventi as e 
+join utenti as u on e.organizzatore=u.utente_id
+where e.costo > 0 
+order by u.cognome asc;
+```
+
+```sql
+-- comando as per rinominare le colonne
+-- in questo caso la tabella risultante avrà nelle colonne i nuovi nomi degli alias
+select e.titolo as titolo_evento,
+    u.nome as nome_organizzatore,
+    u.cognome as cognome_organizzatore
+from eventi as e 
+join utenti as u on e.organizzatore=u.utente_id
+where e.costo > 0 
+order by u.cognome asc;
+```
+
+
+
+
+
