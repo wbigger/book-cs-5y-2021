@@ -298,14 +298,18 @@ Finora abbiamo trattato interrogazioni con una sola tabella. Molto spesso, tutta
 
 Per fare interrogazioni su più tabelle, si usa la clausola **join**.
 
-Vediamo come si legge un'interrogazione con la join. Si comincia sempre con il comando **select**. Dopo aver specificato come al solito le colonne che si vogliono selezionare, usiamo:
+Vediamo come si crea un'interrogazione con la join. Si comincia sempre con il comando **select**. Dopo aver specificato come al solito le colonne che vogliamo selezionare, usiamo:
 1. la clausola **from** con **la tabella che contiene la chiave esterna**
 2. quindi aggiungiamo la clausola **join** con **la tabella a cui fa riferimento la chiave esterna**
 3. aggiungiamo infine la keyword **on** con la condizione sulle chiavi che si vogliono unire
 
 Quando usiamo colonne da più tabelle, è bene specificare sempre anche la tabella quando richiamiamo una colonna, usando la notazione punto, ad esempio `eventi.organizzatore`.
 
-> Tecnicamente, se non ci sono conflitti tra i nomi delle colonne, non sarebbe necessario specificare la tabella; tuttavia è una buona pratica diffusa e consolidata specificare sempre la tabella.
+> Se non ci sono conflitti tra i nomi delle colonne, non sarebbe necessario specificare la tabella; tuttavia è una buona pratica diffusa e consolidata specificare sempre la tabella.
+
+> Tecnicamente, si può partire da una qualsiasi tabella, non solo quella con le chiavi esterne. Però per convenzione partiamo da quella, in modo da darci un'ordine mentale.
+
+> Se e solo se la colonna con la chiave esterna ha lo stesso nome della colonna con la chiave primaria, posso usare la clausola `using` anziché `on`. Questo è particolarmente utile nelle tabelle associative, che vedremo in seguito.
 
 <details closed> 
 <summary>Esempi</summary>
@@ -315,9 +319,13 @@ select eventi.titolo, utenti.nome, utenti.cognome
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id;
 ```
-> Se e solo se la colonna con la chiave esterna ha lo stesso nome della colonna con la chiave primaria, posso usare la clausola `using` anziché `on`. Questo è particolarmente utile nelle tabelle associative, che vedremo in seguito.
+
+</details>
 
 La clausola `join` può essere usata insieme alle clausole `where` o `order by` per filtrare ed organizzare ulteriormente i risultati.
+
+<details closed> 
+<summary>Esempi</summary>
 
 ```sql
 select eventi.titolo, eventi.costo, utenti.nome, utenti.cognome
@@ -327,8 +335,6 @@ where eventi.costo > 0
 order by utenti.cognome asc;
 ```
 </details>
-
-
 
 ### AS
 Come si può intuire dalle ultime query, le richieste complesse possono diventare anche molto lunghe. Per questo motivo è possibile abbreviare i nomi delle tabelle o delle colonne con il comando `as`.
