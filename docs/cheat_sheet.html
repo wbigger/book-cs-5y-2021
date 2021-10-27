@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html" class="active"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="join.html"><strong aria-hidden="true">3.</strong> Join</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html" class="active"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="relationships.html"><strong aria-hidden="true">3.</strong> Relazioni</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -349,7 +349,7 @@ order by cognome,nome,età desc;
 <h3 id="join"><a class="header" href="#join">JOIN</a></h3>
 <p>Finora abbiamo trattato interrogazioni con una sola tabella. Molto spesso, tuttavia, serve fare interrogazioni su più tabelle contemporaneamente. Riprendiamo l'esempio della tabella <code>eventi</code> e la tabella <code>utenti</code>, e che ogni evento abbia esattamente un organizzatore. </p>
 <p>Per fare interrogazioni su più tabelle, si usa la clausola <strong>join</strong>.</p>
-<p>Vediamo come si legge un'interrogazione con la join. Si comincia sempre con il comando <strong>select</strong>. Dopo aver specificato come al solito le colonne che si vogliono selezionare, usiamo:</p>
+<p>Vediamo come si crea un'interrogazione con la join. Si comincia sempre con il comando <strong>select</strong>. Dopo aver specificato come al solito le colonne che vogliamo selezionare, usiamo:</p>
 <ol>
 <li>la clausola <strong>from</strong> con <strong>la tabella che contiene la chiave esterna</strong></li>
 <li>quindi aggiungiamo la clausola <strong>join</strong> con <strong>la tabella a cui fa riferimento la chiave esterna</strong></li>
@@ -357,7 +357,13 @@ order by cognome,nome,età desc;
 </ol>
 <p>Quando usiamo colonne da più tabelle, è bene specificare sempre anche la tabella quando richiamiamo una colonna, usando la notazione punto, ad esempio <code>eventi.organizzatore</code>.</p>
 <blockquote>
-<p>Tecnicamente, se non ci sono conflitti tra i nomi delle colonne, non sarebbe necessario specificare la tabella; tuttavia è una buona pratica diffusa e consolidata specificare sempre la tabella.</p>
+<p>Se non ci sono conflitti tra i nomi delle colonne, non sarebbe necessario specificare la tabella; tuttavia è una buona pratica diffusa e consolidata specificare sempre la tabella.</p>
+</blockquote>
+<blockquote>
+<p>Tecnicamente, si può partire da una qualsiasi tabella, non solo quella con le chiavi esterne. Però per convenzione partiamo da quella, in modo da darci un'ordine mentale.</p>
+</blockquote>
+<blockquote>
+<p>Se e solo se la colonna con la chiave esterna ha lo stesso nome della colonna con la chiave primaria, posso usare la clausola <code>using</code> anziché <code>on</code>. Questo è particolarmente utile nelle tabelle associative, che vedremo in seguito.</p>
 </blockquote>
 <details closed> 
 <summary>Esempi</summary>
@@ -365,7 +371,10 @@ order by cognome,nome,età desc;
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id;
 </code></pre>
+</details>
 <p>La clausola <code>join</code> può essere usata insieme alle clausole <code>where</code> o <code>order by</code> per filtrare ed organizzare ulteriormente i risultati.</p>
+<details closed> 
+<summary>Esempi</summary>
 <pre><code class="language-sql">select eventi.titolo, eventi.costo, utenti.nome, utenti.cognome
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id
@@ -407,7 +416,7 @@ order by u.cognome asc;
                             <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="join.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="relationships.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -419,13 +428,27 @@ order by u.cognome asc;
                     <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="join.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="relationships.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>

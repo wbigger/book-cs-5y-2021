@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="join.html"><strong aria-hidden="true">3.</strong> Join</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="relationships.html"><strong aria-hidden="true">3.</strong> Relazioni</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -404,7 +404,7 @@ order by cognome,nome,età desc;
 <h3 id="join"><a class="header" href="#join">JOIN</a></h3>
 <p>Finora abbiamo trattato interrogazioni con una sola tabella. Molto spesso, tuttavia, serve fare interrogazioni su più tabelle contemporaneamente. Riprendiamo l'esempio della tabella <code>eventi</code> e la tabella <code>utenti</code>, e che ogni evento abbia esattamente un organizzatore. </p>
 <p>Per fare interrogazioni su più tabelle, si usa la clausola <strong>join</strong>.</p>
-<p>Vediamo come si legge un'interrogazione con la join. Si comincia sempre con il comando <strong>select</strong>. Dopo aver specificato come al solito le colonne che si vogliono selezionare, usiamo:</p>
+<p>Vediamo come si crea un'interrogazione con la join. Si comincia sempre con il comando <strong>select</strong>. Dopo aver specificato come al solito le colonne che vogliamo selezionare, usiamo:</p>
 <ol>
 <li>la clausola <strong>from</strong> con <strong>la tabella che contiene la chiave esterna</strong></li>
 <li>quindi aggiungiamo la clausola <strong>join</strong> con <strong>la tabella a cui fa riferimento la chiave esterna</strong></li>
@@ -412,7 +412,13 @@ order by cognome,nome,età desc;
 </ol>
 <p>Quando usiamo colonne da più tabelle, è bene specificare sempre anche la tabella quando richiamiamo una colonna, usando la notazione punto, ad esempio <code>eventi.organizzatore</code>.</p>
 <blockquote>
-<p>Tecnicamente, se non ci sono conflitti tra i nomi delle colonne, non sarebbe necessario specificare la tabella; tuttavia è una buona pratica diffusa e consolidata specificare sempre la tabella.</p>
+<p>Se non ci sono conflitti tra i nomi delle colonne, non sarebbe necessario specificare la tabella; tuttavia è una buona pratica diffusa e consolidata specificare sempre la tabella.</p>
+</blockquote>
+<blockquote>
+<p>Tecnicamente, si può partire da una qualsiasi tabella, non solo quella con le chiavi esterne. Però per convenzione partiamo da quella, in modo da darci un'ordine mentale.</p>
+</blockquote>
+<blockquote>
+<p>Se e solo se la colonna con la chiave esterna ha lo stesso nome della colonna con la chiave primaria, posso usare la clausola <code>using</code> anziché <code>on</code>. Questo è particolarmente utile nelle tabelle associative, che vedremo in seguito.</p>
 </blockquote>
 <details closed> 
 <summary>Esempi</summary>
@@ -420,7 +426,10 @@ order by cognome,nome,età desc;
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id;
 </code></pre>
+</details>
 <p>La clausola <code>join</code> può essere usata insieme alle clausole <code>where</code> o <code>order by</code> per filtrare ed organizzare ulteriormente i risultati.</p>
+<details closed> 
+<summary>Esempi</summary>
 <pre><code class="language-sql">select eventi.titolo, eventi.costo, utenti.nome, utenti.cognome
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id
@@ -454,7 +463,92 @@ join utenti as u on e.organizzatore=u.utente_id
 where e.costo &gt; 0 
 order by u.cognome asc;
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="join-1"><a class="header" href="#join-1">Join</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="relazioni-tra-tabelle"><a class="header" href="#relazioni-tra-tabelle">Relazioni tra tabelle</a></h1>
+<p>Due tabelle possono avere dei riferimenti tra loro di tipo diverso, che affronteremo in questo capitolo.</p>
+<h1 id="uno-a-uno-one-to-one"><a class="header" href="#uno-a-uno-one-to-one">Uno a uno (one-to-one)</a></h1>
+<p>È il caso in cui una riga di una tabella si associa ad una ed una sola riga di un'altra tabella.</p>
+<p>Questo tipo di relazione si ha di solito quando abbiamo una tabella di dettagli. Pensiamo ad esempio ad un'applicazione in cui salviamo nei database i dettagli di un utente.</p>
+<pre><code class="language-sql">create table utenti (
+    utente_id int primary key auto_increment,
+    nome varchar(100),
+    cognome varchar(100),
+);
+create table dettagli_utente (
+    utente_id int,
+    indirizzo varchar(100),
+    telefono varchar(30),
+    foreign key(utente_id) references utenti(utente_id)
+);
+</code></pre>
+<p>In questo caso, ogni dettaglio si riferisce ad uno ed un solo utente, ed ogni utente ha uno es un solo dettaglio.</p>
+<p>Per interrogare il database:</p>
+<pre><code class="language-sql">select u.cognome,d.indirizzo
+from dettagli_utente as d
+join utenti as u
+    using(utente_id);
+</code></pre>
+<p>Da notare che in questa <code>select</code> ho usato <code>using</code> anziché <code>on</code> perché le colonne con la chiave esterna e la chiave primaria avevano lo stesso nome (<code>utente_id</code>).</p>
+<p>Qualcuno potrebbe pensare che la tabella <code>dettagli_utente</code> potrebbe essere fusa con la tabella <code>utenti</code>, cioè potremmo semplicemente aggiungere le colonne <code>indirizzo</code> e <code>telefono</code> ad <code>utenti</code>. Ottima osservazione! In effetti, alcune volte conviene farlo, altre volte no. Bisogna prendere in considerazione:</p>
+<ul>
+<li>quanto spesso utilizzo i dettagli: se li uso raramente, conviene tenerli in una tabella separata</li>
+<li>quanto sono grandi le tabelle: se la tabelle sono grandi, conviene tenerle separate</li>
+<li>se hanno privilegi di accesso diversi: se la tabella dettagli ha dei vincoli di accesso più stringenti (ad esempio perché contiene dei dati sensibili), conviene tenerli in una tabella separata.</li>
+</ul>
+<h1 id="uno-a-molti-one-to-many"><a class="header" href="#uno-a-molti-one-to-many">Uno a molti (one-to-many)</a></h1>
+<p>E' il caso in cui una riga di una tabella può avere un riferimento da più righe di un'altra tabella.</p>
+<p>Pensiamo al caso degli eventi e dell'organizzatore dell'evento. Ogni evento, ha uno ed un solo utente organizzatore, mentre un utente può organizzare vari eventi.</p>
+<pre><code class="language-sql">create table utenti (
+    utente_id int primary key auto_increment,
+    nome varchar(100),
+    cognome varchar(100),
+)
+create table eventi (
+    evento_id int primary key auto_increment,
+    titolo varchar(100),
+    organizzatore int,
+    foreign key(organizzatore) references utenti(utente_id)
+)
+</code></pre>
+<p>Interrogazione:</p>
+<pre><code class="language-sql">select e.titolo,u.cognome
+from eventi as e
+join utenti as u
+    on e.organizzatore=u.utente_id;
+</code></pre>
+<h2 id="molti-a-molti-many-to-many"><a class="header" href="#molti-a-molti-many-to-many">Molti a molti (many-to-many)</a></h2>
+<p>È il caso in cui una riga di una tabella può riferirsi a più righe di un'altra tabella e viceversa. </p>
+<p>Pensiamo ad esempio al caso dei partecipanti ad un evento. Ogni evento può avere più eventi partecipanti, ed ogni utente può partecipare a più eventi.</p>
+<p>Non esiste in SQL un modo semplice di esprimere questa relazione. Per sua natura infatti, ogni colonna può avere solo un valore, non è possibile mettere una lista di valori all'interno della colonna.</p>
+<blockquote>
+<p>In teoria si potrebbe avere una colonna <code>varchar</code> con all'interno più valori, ad esempio più numeri di telefono separati da virgola. Questa sarebbe una convenzione personale dello sviluppatore, non qualcosa di gestito nativamente dal database, ed è fortemente sconsigliato. In ogni caso, quando un database non ha effettivamente colonne con più valori, si dice che è in <em>prima forma normale</em>.</p>
+</blockquote>
+<p>Per rappresentare una relazione molti a molti dobbiamo necessariamente usare una nuova tabella, che conterrà solo chiavi esterne che fanno riferimento alle tabelle che devono essere associate. Questa tabella prende il nome di <em>tabella associativa</em> (junction table).</p>
+<pre><code class="language-sql">create table utenti (
+    utente_id int primary key auto_increment,
+    nome varchar(100),
+    cognome varchar(100),
+);
+create table eventi (
+    evento_id int primary key auto_increment,
+    titolo varchar(100),
+);
+create table partecipanti (
+    evento_id int,
+    utente_id int,
+    foreign key(evento_id) references eventi(evento_id),
+    foreign key(utente_id) references utenti(utente_id),
+);
+</code></pre>
+<p>A questo punto, per poter fare un'interrogazione, dovrò mettere due <code>join</code> concatenate:</p>
+<pre><code class="language-sql">select e.titolo,
+        u.nome as nome_partecipante,
+        u.cognome as cognome_partecipanti
+from partecipanti as p
+join eventi as e
+    using(evento_id)
+join utenti as u
+    using (utente_id);
+</code></pre>
 
                     </main>
 
@@ -470,6 +564,20 @@ order by u.cognome asc;
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
