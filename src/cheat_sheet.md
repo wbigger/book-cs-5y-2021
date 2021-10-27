@@ -315,6 +315,7 @@ select eventi.titolo, utenti.nome, utenti.cognome
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id;
 ```
+> Se e solo se la colonna con la chiave esterna ha lo stesso nome della colonna con la chiave primaria, posso usare la clausola `using` anziché `on`. Questo è particolarmente utile nelle tabelle associative, che vedremo in seguito.
 
 La clausola `join` può essere usata insieme alle clausole `where` o `order by` per filtrare ed organizzare ulteriormente i risultati.
 
@@ -326,6 +327,8 @@ where eventi.costo > 0
 order by utenti.cognome asc;
 ```
 </details>
+
+
 
 ### AS
 Come si può intuire dalle ultime query, le richieste complesse possono diventare anche molto lunghe. Per questo motivo è possibile abbreviare i nomi delle tabelle o delle colonne con il comando `as`.

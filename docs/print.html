@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="join.html"><strong aria-hidden="true">3.</strong> Join</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -454,6 +454,7 @@ join utenti as u on e.organizzatore=u.utente_id
 where e.costo &gt; 0 
 order by u.cognome asc;
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="join-1"><a class="header" href="#join-1">Join</a></h1>
 
                     </main>
 
@@ -469,20 +470,6 @@ order by u.cognome asc;
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
