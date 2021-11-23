@@ -294,7 +294,7 @@
 <em>modifica una riga o più righe nella tabella</em></p>
 <details closed> 
 <summary>esempi</summary>
-<pre><code class="language-sql">update studenti set (nome='claudio') where cognome='rossi';
+<pre><code class="language-sql">update studenti set nome='claudio' where cognome='rossi';
 </code></pre>
 </details>
 <h3 id="delete"><a class="header" href="#delete">DELETE</a></h3>
@@ -435,20 +435,6 @@ order by u.cognome asc;
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>

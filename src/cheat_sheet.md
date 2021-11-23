@@ -220,7 +220,7 @@ insert into prodotti (nome, costo, disponibilita) values ('acqua', 0.50);
 <summary>esempi</summary>
 
 ```sql
-update studenti set (nome='claudio') where cognome='rossi';
+update studenti set nome='claudio' where cognome='rossi';
 ```
 </details>
 
