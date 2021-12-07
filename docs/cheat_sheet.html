@@ -408,6 +408,32 @@ join utenti as u on e.organizzatore=u.utente_id
 where e.costo &gt; 0 
 order by u.cognome asc;
 </code></pre>
+</details> 
+<h1 id="drop-table-if-exists"><a class="header" href="#drop-table-if-exists">Drop table if exists</a></h1>
+<p>In fase di sviluppo, può essere utile fare il drop delle tabelle e ricrearle da capo, invece di modificarle. Se si fa il drop di una tabella che non esiste, però, SQL ci ritorna un errore; questo è particolarmente fastidioso quando scriviamo uno script. Per evitare questo problema esiste il drop condizionato all'esistenza effettiva della tabella.</p>
+<detail closed>
+```sql
+drop table if exists utenti;
+```
+</detail>
+<h3 id="on-delete"><a class="header" href="#on-delete">On delete</a></h3>
+<p>Cosa succede se cancelliamo una riga che è un riferimento in un'altra tabella? Consideriamo ad esempio che ho diversi eventi organizzati da Mario Rossi. Ad un certo punto, cancello l'utente Mario Rossi. Cosa succede a tutti gli eventi organizzati da lui?</p>
+<p>Esistono varie strategie, essenzialmente:</p>
+<ul>
+<li>se la chiave esterna è facoltativa, si può sostituire con NULL</li>
+<li>cancello la riga con la chiave esterna</li>
+</ul>
+<detail closed>
+<pre><code class="language-sql">create table eventi (
+    -- ...
+    -- se viene cancellato l'organizzatore, nell'evento viene impostato a NULL
+    foreign key(organizzatore) references utenti(utente_id) ON DELETE SET NULL
+</code></pre>
+<pre><code class="language-sql">create table eventi (
+    -- ...
+    -- se viene cancellato l'organizzatore, viene cancellato anche l'evento
+    foreign key(organizzatore) references utenti(utente_id) ON DELETE CASCADE
+</code></pre>
 
                     </main>
 
@@ -435,6 +461,20 @@ order by u.cognome asc;
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>

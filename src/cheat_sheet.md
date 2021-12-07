@@ -366,8 +366,36 @@ join utenti as u on e.organizzatore=u.utente_id
 where e.costo > 0 
 order by u.cognome asc;
 ```
+</details> 
 
+# Drop table if exists
+In fase di sviluppo, può essere utile fare il drop delle tabelle e ricrearle da capo, invece di modificarle. Se si fa il drop di una tabella che non esiste, però, SQL ci ritorna un errore; questo è particolarmente fastidioso quando scriviamo uno script. Per evitare questo problema esiste il drop condizionato all'esistenza effettiva della tabella.
 
+<detail closed>
+```sql
+drop table if exists utenti;
+```
+</detail>
 
+### On delete
+Cosa succede se cancelliamo una riga che è un riferimento in un'altra tabella? Consideriamo ad esempio che ho diversi eventi organizzati da Mario Rossi. Ad un certo punto, cancello l'utente Mario Rossi. Cosa succede a tutti gli eventi organizzati da lui?
 
+Esistono varie strategie, essenzialmente:
+- se la chiave esterna è facoltativa, si può sostituire con NULL
+- cancello la riga con la chiave esterna
 
+<detail closed>
+
+```sql
+create table eventi (
+    -- ...
+    -- se viene cancellato l'organizzatore, nell'evento viene impostato a NULL
+    foreign key(organizzatore) references utenti(utente_id) ON DELETE SET NULL
+```
+
+```sql
+create table eventi (
+    -- ...
+    -- se viene cancellato l'organizzatore, viene cancellato anche l'evento
+    foreign key(organizzatore) references utenti(utente_id) ON DELETE CASCADE
+```
