@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Relazioni - Informatica - Quinto anno - Materiale didattico</title>
+        <title>Schema logico - Informatica - Quinto anno - Materiale didattico</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="relationships.html" class="active"><strong aria-hidden="true">3.</strong> Relazioni</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01-chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="02-cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="03-relationships.html"><strong aria-hidden="true">3.</strong> Relazioni</a></li><li class="chapter-item expanded "><a href="04-requirements.html"><strong aria-hidden="true">4.</strong> Raccolta dei requisiti</a></li><li class="chapter-item expanded "><a href="05-er_model.html"><strong aria-hidden="true">5.</strong> Schema concettuale</a></li><li class="chapter-item expanded "><a href="06-logic.html" class="active"><strong aria-hidden="true">6.</strong> Schema logico</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -138,98 +138,43 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="relazioni-tra-tabelle"><a class="header" href="#relazioni-tra-tabelle">Relazioni tra tabelle</a></h1>
-<p>Due tabelle possono avere dei riferimenti tra loro di tipo diverso, che affronteremo in questo capitolo.</p>
-<h1 id="uno-a-uno-one-to-one"><a class="header" href="#uno-a-uno-one-to-one">Uno a uno (one-to-one)</a></h1>
-<p>È il caso in cui una riga di una tabella si associa ad una ed una sola riga di un'altra tabella.</p>
-<p>Questo tipo di relazione si ha di solito quando abbiamo una tabella di dettagli. Pensiamo ad esempio ad un'applicazione in cui salviamo nei database i dettagli di un utente.</p>
-<pre><code class="language-sql">create table utenti (
-    utente_id int primary key auto_increment,
-    nome varchar(100),
-    cognome varchar(100),
-);
-create table dettagli_utente (
-    utente_id int,
-    indirizzo varchar(100),
-    telefono varchar(30),
-    foreign key(utente_id) references utenti(utente_id)
-);
-</code></pre>
-<p>In questo caso, ogni dettaglio si riferisce ad uno ed un solo utente, ed ogni utente ha uno es un solo dettaglio.</p>
-<p>Per interrogare il database:</p>
-<pre><code class="language-sql">select u.cognome,d.indirizzo
-from dettagli_utente as d
-join utenti as u
-    using(utente_id);
-</code></pre>
-<p>Da notare che in questa <code>select</code> ho usato <code>using</code> anziché <code>on</code> perché le colonne con la chiave esterna e la chiave primaria avevano lo stesso nome (<code>utente_id</code>).</p>
-<p>Qualcuno potrebbe pensare che la tabella <code>dettagli_utente</code> potrebbe essere fusa con la tabella <code>utenti</code>, cioè potremmo semplicemente aggiungere le colonne <code>indirizzo</code> e <code>telefono</code> ad <code>utenti</code>. Ottima osservazione! In effetti, alcune volte conviene farlo, altre volte no. Bisogna prendere in considerazione:</p>
+                        <h1 id="schema-logico"><a class="header" href="#schema-logico">Schema logico</a></h1>
+<p>Una volta che siamo soddisfatti con lo schema concettuale, possiamo passare a convertirlo nello schema logico che poi potrà essere implementato nel DBMS.</p>
+<p>Per fare questo passaggio, ci sono alcune regole che dobbiamo seguire.</p>
+<h2 id="entità-ed-attributi"><a class="header" href="#entità-ed-attributi">Entità ed attributi</a></h2>
+<p>Per le entità valgono le seguenti regole:</p>
 <ul>
-<li>quanto spesso utilizzo i dettagli: se li uso raramente, conviene tenerli in una tabella separata</li>
-<li>quanto sono grandi le tabelle: se la tabelle sono grandi, conviene tenerle separate</li>
-<li>se hanno privilegi di accesso diversi: se la tabella dettagli ha dei vincoli di accesso più stringenti (ad esempio perché contiene dei dati sensibili), conviene tenerli in una tabella separata.</li>
+<li>ogni entità diventa una tabella</li>
+<li>le tabelle si rappresentano con la sintassi <code>nometabella()</code></li>
+<li>il nome delle entità diventa il nome della tabella, <em>convertito al plurale</em> e con la lettera minuscola (es. Utente diventa utenti)</li>
+<li>ogni attributo diventa un'attributo della tabella</li>
+<li>se la chiave primaria è <code>id</code>, si aggiunge il nome della tabella (al singolare), ad esempio <code>id_utente</code></li>
+<li>le chiavi primarie sono <ins>sottolineate</ins></li>
 </ul>
-<h1 id="uno-a-molti-one-to-many"><a class="header" href="#uno-a-molti-one-to-many">Uno a molti (one-to-many)</a></h1>
-<p>E' il caso in cui una riga di una tabella può avere un riferimento da più righe di un'altra tabella.</p>
-<p>Pensiamo al caso degli eventi e dell'organizzatore dell'evento. Ogni evento, ha uno ed un solo utente organizzatore, mentre un utente può organizzare vari eventi.</p>
-<pre><code class="language-sql">create table utenti (
-    utente_id int primary key auto_increment,
-    nome varchar(100),
-    cognome varchar(100),
-)
-create table eventi (
-    evento_id int primary key auto_increment,
-    titolo varchar(100),
-    organizzatore int,
-    foreign key(organizzatore) references utenti(utente_id)
-)
-</code></pre>
-<p>Interrogazione:</p>
-<pre><code class="language-sql">select e.titolo,u.cognome
-from eventi as e
-join utenti as u
-    on e.organizzatore=u.utente_id;
-</code></pre>
-<h2 id="molti-a-molti-many-to-many"><a class="header" href="#molti-a-molti-many-to-many">Molti a molti (many-to-many)</a></h2>
-<p>È il caso in cui una riga di una tabella può riferirsi a più righe di un'altra tabella e viceversa. </p>
-<p>Pensiamo ad esempio al caso dei partecipanti ad un evento. Ogni evento può avere più eventi partecipanti, ed ogni utente può partecipare a più eventi.</p>
-<p>Non esiste in SQL un modo semplice di esprimere questa relazione. Per sua natura infatti, ogni colonna può avere solo un valore, non è possibile mettere una lista di valori all'interno della colonna.</p>
-<blockquote>
-<p>In teoria si potrebbe avere una colonna <code>varchar</code> con all'interno più valori, ad esempio più numeri di telefono separati da virgola. Questa sarebbe una convenzione personale dello sviluppatore, non qualcosa di gestito nativamente dal database, ed è fortemente sconsigliato. In ogni caso, quando un database non ha effettivamente colonne con più valori, si dice che è in <em>prima forma normale</em>.</p>
-</blockquote>
-<p>Per rappresentare una relazione molti a molti dobbiamo necessariamente usare una nuova tabella, che conterrà solo chiavi esterne che fanno riferimento alle tabelle che devono essere associate. Questa tabella prende il nome di <em>tabella associativa</em> (junction table).</p>
-<pre><code class="language-sql">create table utenti (
-    utente_id int primary key auto_increment,
-    nome varchar(100),
-    cognome varchar(100),
-);
-create table eventi (
-    evento_id int primary key auto_increment,
-    titolo varchar(100),
-);
-create table partecipanti (
-    evento_id int,
-    utente_id int,
-    foreign key(evento_id) references eventi(evento_id),
-    foreign key(utente_id) references utenti(utente_id),
-);
-</code></pre>
-<p>A questo punto, per poter fare un'interrogazione, dovrò mettere due <code>join</code> concatenate:</p>
-<pre><code class="language-sql">select e.titolo,
-        u.nome as nome_partecipante,
-        u.cognome as cognome_partecipanti
-from partecipanti as p
-join eventi as e
-    using(evento_id)
-join utenti as u
-    using (utente_id);
-</code></pre>
+<p>Riprendendo l'esempio del capitolo precedente:</p>
+<p>utenti(<ins>id_utente</ins>,nome,cognome)
+eventi(<ins>id_evento</ins>,titolo, costo)</p>
+<p>Queste tabelle ancora non sono complete perché mancano le chiavi esterne, che vedremo nel prossimo paragrafo.</p>
+<h2 id="relazioni"><a class="header" href="#relazioni">Relazioni</a></h2>
+<p>Per le relazioni valgono le seguenti regole:</p>
+<ul>
+<li>per le relazioni uno a molti (una molteplicità ha cardinalità massima <code>1</code>, l'altra <code>n</code>), si aggiunge una chiave esterna nel lato &quot;uno&quot; della relazione</li>
+<li>per le relazioni molti a molti (entrambe le molteplicità della relazione hanno cardinalità massima <code>n</code>), si crea una nuova tabella associativa, che contiene come attributi le chiavi esterne verso le due relazioni; bisogna anche aggiungere un vincolo di unicità della coppia di chiavi esterne</li>
+<li>per le relazioni uno a uno (entrambe le molteplicità hanno cardinalità massima <code>1</code>), si può procedere in diversi modi:</li>
+<li>le due tabelle possono diventare un'unica tabella che contiene gli attributi di entrambe le tabelle</li>
+<li>se non si vuole creare un'unica entità, si procede come nel caso delle relazioni molti a molti</li>
+<li>per le chiavi esterne si usa il <em>corsivo</em></li>
+</ul>
+<p>Completando l'esempio di prima:
+utenti(<ins>id_utente</ins>,nome,cognome)
+eventi(<ins>id_evento</ins>,titolo, costo, <em>organizzatore</em>)
+partecipanti(<ins>id_utente</ins>,<ins>id_evento</ins>)</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="cheat_sheet.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="05-er_model.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -238,7 +183,7 @@ join utenti as u
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="cheat_sheet.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="05-er_model.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
             </nav>

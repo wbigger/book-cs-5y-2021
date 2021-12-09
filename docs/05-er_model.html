@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="it" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Schema concettuale - Informatica - Quinto anno - Materiale didattico</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01-chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="02-cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="03-relationships.html"><strong aria-hidden="true">3.</strong> Relazioni</a></li><li class="chapter-item expanded "><a href="04-requirements.html"><strong aria-hidden="true">4.</strong> Raccolta dei requisiti</a></li><li class="chapter-item expanded "><a href="05-er_model.html" class="active"><strong aria-hidden="true">5.</strong> Schema concettuale</a></li><li class="chapter-item expanded "><a href="06-logic.html"><strong aria-hidden="true">6.</strong> Schema logico</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Informatica - Quinto anno - Materiale didattico</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/wbigger/book-cs-5y-2021.git" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="schema-concettuale-modello-e-r"><a class="header" href="#schema-concettuale-modello-e-r">Schema concettuale (modello E-R)</a></h1>
+<p>A questo punto possiamo passare dagli appunti ad una raffigurazione grafica un po' più strutturata, per ragionare meglio sul progetto da realizzare.</p>
+<p>Lo schema che andremo a creare si chiama <strong>schema concettuale</strong>. In questa fare siamo ancora in una descrizione ad alto livello, non dobbiamo soffermarci o preoccuparci degli aspetti tecnici.</p>
+<p>Lo schema concettuale rappresenta la struttura del progetto, non si occupa delle singole <em>istanze</em> (ovvero del singolo dipendente, prenotazione, etc.)</p>
+<blockquote>
+<p>Esistono molte convenzioni per i diagrammi E-R. Noi ne seguiremo le stesse convenzioni del corso di Base di Dati della Sapienza (prof.ssa Tiziana Catarci, prof. Francesco Leotta). Le slide sono disponibili online.</p>
+</blockquote>
+<h2 id="entità"><a class="header" href="#entità">Entità</a></h2>
+<p>Le entità rappresentano concetti all'interno del nostro dominio. Tipicamente, i nomi che abbiamo individuato nella fase di analisi dei requisiti diventano entità.</p>
+<p>Le entità:</p>
+<ul>
+<li>si rappresentano attraverso dei rettangoli</li>
+<li>hanno il nome al singolare</li>
+<li>generalmente iniziano con le lettere maiuscole</li>
+</ul>
+<p><img src="./assets/entity.png" alt="Entità" /></p>
+<h2 id="relazioni"><a class="header" href="#relazioni">Relazioni</a></h2>
+<p>Le relazioni tra entità si rappresentano tramite rombi con all'interno un verbo.</p>
+<p><img src="./assets/relation.png" alt="Relazione" /></p>
+<p>All'interno del rombo ci deve essere anche una freccia che indica la direzione in cui si legge il verbo. Si devono mettere inoltre le <em>molteplicità</em> nel punto in cui la linea della relazione tocca l'entità.</p>
+<p><img src="./assets/relation2.png" alt="Relazione" /></p>
+<p>La molteplicità indica quante volte una certa istanza può essere coinvolta nella relazione, e si indica con una coppia di numeri tra parentesi separati da virgola, ad esempio <code>(0,1)</code> oppure <code>(1,n)</code>. Se i due numeri coincidono, si può scrivere una volta sola, ad esempio <code>(1)</code> equivale a <code>(1,1)</code>. I due numeri in questione si chiamano <strong>cardinalità</strong>, ed in particolare il primo numero è la cardinalità <em>minima</em> ed il secondo numero la cardinalità <em>massima</em>.</p>
+<p>Alcune osservazioni</p>
+<ul>
+<li>se la cardinalità minima è 0, vuol dire che la relazione è opzionale</li>
+<li>se la cardinalità minima è 1 (o più), vuol dire che la relazione è obbligatoria</li>
+<li>se la cardinalità massima è un numero esatto, vuol dire che la relazione può avere al massimo quel numero di istanze</li>
+<li>se cardinalità massima è <code>n</code>, vuol dire che la relazione può avere un numero indeterminato di istanze</li>
+</ul>
+<p>Ad esempio:
+<img src="./assets/er.png" alt="ER" /></p>
+<p>Le molteplicità si leggono partendo dalla relazione opposta e passando per la relazione. Di seguito alcuni esempi.</p>
+<p>Relazione &quot;partecipa a&quot;, molteplicità lato evento (0,n):</p>
+<ul>
+<li>possono esistere utenti che non partecipano a nessun evento</li>
+<li>un utente può partecipare a più eventi </li>
+</ul>
+<p>Relazione &quot;partecipa a&quot;, molteplicità lato utente (0,n):</p>
+<ul>
+<li>possono esistere eventi senza partecipanti</li>
+<li>un evento può avere più partecipanti</li>
+</ul>
+<p>Relazione &quot;organizza&quot;, molteplicità lato utente (1):</p>
+<ul>
+<li>un evento deve avere un organizzatore</li>
+<li>un evento è organizzato da esattamente un utente</li>
+</ul>
+<p>Relazione &quot;organizza&quot;, molteplicità lato evento (0,n):</p>
+<ul>
+<li>possono esistere utenti che non organizzano nessun evento</li>
+<li>un utente può organizzare più eventi</li>
+</ul>
+<blockquote>
+<p>Le relazioni possono collegare anche più di due entità; in questo caso però la situazione diventa un po' più complicata da leggere e gestire. In generale, se possibile meglio evitare.</p>
+</blockquote>
+<p>Alcune relazioni hanno molteplicità più complesse; in questo caso si aggiungono delle note sotto il diagramma per specificarle in modo discorsivo.</p>
+<h2 id="attributi"><a class="header" href="#attributi">Attributi</a></h2>
+<p>Sia le entità che le relazioni possono avere attributi. Gli attributi li rappresentiamo con un bastoncino che termina con una pallina:</p>
+<ul>
+<li>se la pallina è nera, l'attributo è una chiave primaria</li>
+<li>se la pallina è bianca, è un normale attributo</li>
+</ul>
+<p><img src="./assets/er-full.png" alt="ER-full" /></p>
+<p>Altre convenzioni da tenere a mente:</p>
+<ul>
+<li>se non c'è una chiave primaria naturale (es. codice fiscale), usiamo una chiave surrogata che possiamo chiamare semplicemente <code>id</code></li>
+<li>non è necessario mettere come attributi le chiavi esterne, perché quelle sono già incluse all'interno delle relazioni.</li>
+</ul>
+<h3 id="attributi-calcolati"><a class="header" href="#attributi-calcolati">Attributi calcolati</a></h3>
+<p>Alcuni valore possono essere calcolati automaticamente da altri attributi. Ad esempio, per l'entità utente potremmo avere bisogno sia della data di nascita che dell'età. In generale, conviene mettere solo un attributo, e specificare nelle note sotto al diagramma che il valore di età verrà calcolato. </p>
+<p>In alcuni casi però può convenire mantenere un attributo calcolato, se questo ha dei vantaggi computazionali. Ad esempio immaginiamo un blog in cui devo visualizzare la lista di tutti i post e per ognuno il numero di like. Ogni post potrebbe venire visualizzato migliaia di volte al giorno, e potrebbe avere migliaia di like. In teoria, il numero di like è un valore calcolato come numero di istanze della relazione post ed utente, ma probabilmente conviene salvarlo come attributo ridondato, per evitare di calcolarlo ogni volta. Il problema è ovviamente che ad ogni nuovo like devo ricordarmi di aggiornare il valore dell'attributo.</p>
+<h2 id="scelta-tra-entità-relazione-e-attributo"><a class="header" href="#scelta-tra-entità-relazione-e-attributo">Scelta tra entità, relazione e attributo</a></h2>
+<p>A volta può sorgere il dubbio se &quot;qualcosa&quot; sia meglio rappresentarlo come entità e relazione. Immaginiamo ad esempio un utente che prenota un'acconciatura dal parrucchiere. Il concetto di &quot;prenotazione&quot; è un entità a sé stante o una relazione tra utente ed acconciatura?</p>
+<p>Altre volte può sorgere il dubbio se qualcosa è un'entità indipendente o solo un attributo. Ad esempio, la città dove vive l'utente, posso rappresentarla solo come un attributo o deve essere un'entità separata?</p>
+<p>Non c'è una risposta corretta ed una sbagliata, ma possiamo tenere in mente le seguenti cose:</p>
+<ul>
+<li>se qualcosa ha un significato indipendente dal resto del modello, allora probabilmente è un'entità</li>
+<li>se qualcosa ha senso solo in relazione ad altre entità, allora probabilmente è una relazione</li>
+<li>come regola a spanne, se una relazione comincia ad avere molti attributi, probabilmente dovrebbe essere un'entità</li>
+<li>se un attributo è dipendente dagli altri attributi, allora potrebbe essere utile fare un'entità separata (es. città e regione sono dipendenti tra loro)</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="04-requirements.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="06-logic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="04-requirements.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="06-logic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

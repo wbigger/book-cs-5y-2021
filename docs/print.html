@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="relationships.html"><strong aria-hidden="true">3.</strong> Relazioni</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01-chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li class="chapter-item expanded "><a href="02-cheat_sheet.html"><strong aria-hidden="true">2.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="03-relationships.html"><strong aria-hidden="true">3.</strong> Relazioni</a></li><li class="chapter-item expanded "><a href="04-requirements.html"><strong aria-hidden="true">4.</strong> Raccolta dei requisiti</a></li><li class="chapter-item expanded "><a href="05-er_model.html"><strong aria-hidden="true">5.</strong> Schema concettuale</a></li><li class="chapter-item expanded "><a href="06-logic.html"><strong aria-hidden="true">6.</strong> Schema logico</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -575,6 +575,167 @@ join eventi as e
 join utenti as u
     using (utente_id);
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="raccolta-dei-requisiti"><a class="header" href="#raccolta-dei-requisiti">Raccolta dei requisiti</a></h1>
+<p>La creazione e manutenzione di un database è qualcosa di molto complesso (soprattutto per i DB relazionali come SQL), quindi conviene bisogna fare un'attenta progettazione iniziale per ridurre al minimo le modifiche in fase esecutiva.</p>
+<h2 id="colloquio-con-il-committente-customer"><a class="header" href="#colloquio-con-il-committente-customer">Colloquio con il committente (customer)</a></h2>
+<p>Per cominciare a progettare il database, bisogna raccogliere prima di tutto i requisiti dagli <em>stakeholder</em>. Gli stakeholder sono &quot;chiunque c'entri&quot; con il progetto, quindi il committente, gli utenti finali, eventuali sistemisti, norme e regolamenti, etc.</p>
+<p>Nel nostro caso, per semplicità, consideriamo solo il colloquio con il committente, che dal nostro punto di vista possiamo anche chiamare <em>cliente</em>.</p>
+<blockquote>
+<p>Nell'agile/scrum, il colloquio è un compito che svolge il Product Owner.</p>
+</blockquote>
+<p>Durante il colloquio, dovrete cercare di raccogliere informazioni a riguardo:</p>
+<ul>
+<li>cosa ci si aspetti che faccia il servizio, in poche parole</li>
+<li>chi saranno gli utilizzatori del servizio (amministratori, impiegati, utenti finali, etc.)</li>
+<li>quanti sono gli utenti attesi che usufruiranno del servizio, per ogni tipologia (10 utenti finali al giorno? 100? 1000? quanti impiegati?)</li>
+<li>quali operazioni deve svolgere ogni tipologia utente</li>
+<li>quante volte ogni tipologia di utente svolge una certa operazione (es. accesso al sito, prenotazione, like su un elemento, etc.)</li>
+</ul>
+<p>Diamo inoltre i seguenti suggerimenti:</p>
+<ul>
+<li>lasciate parlare liberamente il vostro interlocutore, non interrompetelo troppo di frequente</li>
+<li>se l'interlocutore sta evidentemente divagando, riportatelo sul progetto cone delle domande su argomenti specifici di interesse</li>
+<li>non fate domande troppo tecniche, siete voi che dovete saper gestire i dettagli implementativi, non lui</li>
+<li>non esitate a chiedere il perché di una certa affermazione, anche se a volte la risposta può sembrare scontata, a volte non lo è</li>
+</ul>
+<p>Alcuni consigli su come scrivere gli appunti:</p>
+<ul>
+<li>usate sempre un verbo e non solo sostantivi negli appunti</li>
+</ul>
+<pre><code class="language-txt">lista prenotazioni --&gt; controllare lista prenotazioni
+</code></pre>
+<ul>
+<li>cercate sempre di mettere il soggetto al verbo, soprattutto se non è ovvio</li>
+</ul>
+<pre><code class="language-txt">controllare lista prenotazioni --&gt; l'amministratore deve poter controllare la lista prenotazioni
+</code></pre>
+<ul>
+<li>quando possibile cercate di mettere il perché di un certo appunto</li>
+</ul>
+<pre><code class="language-txt">l'amministratore deve poter controllare la lista prenotazioni --&gt; l'amministratore deve poter controllare la lista prenotazioni per fare rendicontazione giornaliera
+</code></pre>
+<p>In generale, cercate di prendere appunti in forma discorsiva, non come semplice elenco puntato.</p>
+<p>Soprattutto se il colloquio è in presenza, si consiglia inoltre di prendere appunti su un foglio di carta, per mettere a maggior agio l'interlocutore, fare disegni e diagrammi, sottolineare o aggiungere note facilmente ad appunti già presi.</p>
+<h2 id="analisi-degli-appunti"><a class="header" href="#analisi-degli-appunti">Analisi degli appunti</a></h2>
+<p>Una volta raccolti gli appunti, si passa all'analisi.</p>
+<p>Anche in questo caso, vediamo un metodo semplice per analizzare i dati</p>
+<ul>
+<li>cerchiare le parole (o metterle in grassetto se il file è digitale)</li>
+<li>sottolineare i verbi</li>
+<li>se necessario, farsi un dizionarietto con gli eventuali sinonimi. Ad esempio, il committente potrebbe aver parlato di &quot;cliente&quot;, &quot;ragazzo&quot;, &quot;compratore&quot; riferendosi alla stessa tipologia di utente.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="schema-concettuale-modello-e-r"><a class="header" href="#schema-concettuale-modello-e-r">Schema concettuale (modello E-R)</a></h1>
+<p>A questo punto possiamo passare dagli appunti ad una raffigurazione grafica un po' più strutturata, per ragionare meglio sul progetto da realizzare.</p>
+<p>Lo schema che andremo a creare si chiama <strong>schema concettuale</strong>. In questa fare siamo ancora in una descrizione ad alto livello, non dobbiamo soffermarci o preoccuparci degli aspetti tecnici.</p>
+<p>Lo schema concettuale rappresenta la struttura del progetto, non si occupa delle singole <em>istanze</em> (ovvero del singolo dipendente, prenotazione, etc.)</p>
+<blockquote>
+<p>Esistono molte convenzioni per i diagrammi E-R. Noi ne seguiremo le stesse convenzioni del corso di Base di Dati della Sapienza (prof.ssa Tiziana Catarci, prof. Francesco Leotta). Le slide sono disponibili online.</p>
+</blockquote>
+<h2 id="entità"><a class="header" href="#entità">Entità</a></h2>
+<p>Le entità rappresentano concetti all'interno del nostro dominio. Tipicamente, i nomi che abbiamo individuato nella fase di analisi dei requisiti diventano entità.</p>
+<p>Le entità:</p>
+<ul>
+<li>si rappresentano attraverso dei rettangoli</li>
+<li>hanno il nome al singolare</li>
+<li>generalmente iniziano con le lettere maiuscole</li>
+</ul>
+<p><img src="./assets/entity.png" alt="Entità" /></p>
+<h2 id="relazioni"><a class="header" href="#relazioni">Relazioni</a></h2>
+<p>Le relazioni tra entità si rappresentano tramite rombi con all'interno un verbo.</p>
+<p><img src="./assets/relation.png" alt="Relazione" /></p>
+<p>All'interno del rombo ci deve essere anche una freccia che indica la direzione in cui si legge il verbo. Si devono mettere inoltre le <em>molteplicità</em> nel punto in cui la linea della relazione tocca l'entità.</p>
+<p><img src="./assets/relation2.png" alt="Relazione" /></p>
+<p>La molteplicità indica quante volte una certa istanza può essere coinvolta nella relazione, e si indica con una coppia di numeri tra parentesi separati da virgola, ad esempio <code>(0,1)</code> oppure <code>(1,n)</code>. Se i due numeri coincidono, si può scrivere una volta sola, ad esempio <code>(1)</code> equivale a <code>(1,1)</code>. I due numeri in questione si chiamano <strong>cardinalità</strong>, ed in particolare il primo numero è la cardinalità <em>minima</em> ed il secondo numero la cardinalità <em>massima</em>.</p>
+<p>Alcune osservazioni</p>
+<ul>
+<li>se la cardinalità minima è 0, vuol dire che la relazione è opzionale</li>
+<li>se la cardinalità minima è 1 (o più), vuol dire che la relazione è obbligatoria</li>
+<li>se la cardinalità massima è un numero esatto, vuol dire che la relazione può avere al massimo quel numero di istanze</li>
+<li>se cardinalità massima è <code>n</code>, vuol dire che la relazione può avere un numero indeterminato di istanze</li>
+</ul>
+<p>Ad esempio:
+<img src="./assets/er.png" alt="ER" /></p>
+<p>Le molteplicità si leggono partendo dalla relazione opposta e passando per la relazione. Di seguito alcuni esempi.</p>
+<p>Relazione &quot;partecipa a&quot;, molteplicità lato evento (0,n):</p>
+<ul>
+<li>possono esistere utenti che non partecipano a nessun evento</li>
+<li>un utente può partecipare a più eventi </li>
+</ul>
+<p>Relazione &quot;partecipa a&quot;, molteplicità lato utente (0,n):</p>
+<ul>
+<li>possono esistere eventi senza partecipanti</li>
+<li>un evento può avere più partecipanti</li>
+</ul>
+<p>Relazione &quot;organizza&quot;, molteplicità lato utente (1):</p>
+<ul>
+<li>un evento deve avere un organizzatore</li>
+<li>un evento è organizzato da esattamente un utente</li>
+</ul>
+<p>Relazione &quot;organizza&quot;, molteplicità lato evento (0,n):</p>
+<ul>
+<li>possono esistere utenti che non organizzano nessun evento</li>
+<li>un utente può organizzare più eventi</li>
+</ul>
+<blockquote>
+<p>Le relazioni possono collegare anche più di due entità; in questo caso però la situazione diventa un po' più complicata da leggere e gestire. In generale, se possibile meglio evitare.</p>
+</blockquote>
+<p>Alcune relazioni hanno molteplicità più complesse; in questo caso si aggiungono delle note sotto il diagramma per specificarle in modo discorsivo.</p>
+<h2 id="attributi"><a class="header" href="#attributi">Attributi</a></h2>
+<p>Sia le entità che le relazioni possono avere attributi. Gli attributi li rappresentiamo con un bastoncino che termina con una pallina:</p>
+<ul>
+<li>se la pallina è nera, l'attributo è una chiave primaria</li>
+<li>se la pallina è bianca, è un normale attributo</li>
+</ul>
+<p><img src="./assets/er-full.png" alt="ER-full" /></p>
+<p>Altre convenzioni da tenere a mente:</p>
+<ul>
+<li>se non c'è una chiave primaria naturale (es. codice fiscale), usiamo una chiave surrogata che possiamo chiamare semplicemente <code>id</code></li>
+<li>non è necessario mettere come attributi le chiavi esterne, perché quelle sono già incluse all'interno delle relazioni.</li>
+</ul>
+<h3 id="attributi-calcolati"><a class="header" href="#attributi-calcolati">Attributi calcolati</a></h3>
+<p>Alcuni valore possono essere calcolati automaticamente da altri attributi. Ad esempio, per l'entità utente potremmo avere bisogno sia della data di nascita che dell'età. In generale, conviene mettere solo un attributo, e specificare nelle note sotto al diagramma che il valore di età verrà calcolato. </p>
+<p>In alcuni casi però può convenire mantenere un attributo calcolato, se questo ha dei vantaggi computazionali. Ad esempio immaginiamo un blog in cui devo visualizzare la lista di tutti i post e per ognuno il numero di like. Ogni post potrebbe venire visualizzato migliaia di volte al giorno, e potrebbe avere migliaia di like. In teoria, il numero di like è un valore calcolato come numero di istanze della relazione post ed utente, ma probabilmente conviene salvarlo come attributo ridondato, per evitare di calcolarlo ogni volta. Il problema è ovviamente che ad ogni nuovo like devo ricordarmi di aggiornare il valore dell'attributo.</p>
+<h2 id="scelta-tra-entità-relazione-e-attributo"><a class="header" href="#scelta-tra-entità-relazione-e-attributo">Scelta tra entità, relazione e attributo</a></h2>
+<p>A volta può sorgere il dubbio se &quot;qualcosa&quot; sia meglio rappresentarlo come entità e relazione. Immaginiamo ad esempio un utente che prenota un'acconciatura dal parrucchiere. Il concetto di &quot;prenotazione&quot; è un entità a sé stante o una relazione tra utente ed acconciatura?</p>
+<p>Altre volte può sorgere il dubbio se qualcosa è un'entità indipendente o solo un attributo. Ad esempio, la città dove vive l'utente, posso rappresentarla solo come un attributo o deve essere un'entità separata?</p>
+<p>Non c'è una risposta corretta ed una sbagliata, ma possiamo tenere in mente le seguenti cose:</p>
+<ul>
+<li>se qualcosa ha un significato indipendente dal resto del modello, allora probabilmente è un'entità</li>
+<li>se qualcosa ha senso solo in relazione ad altre entità, allora probabilmente è una relazione</li>
+<li>come regola a spanne, se una relazione comincia ad avere molti attributi, probabilmente dovrebbe essere un'entità</li>
+<li>se un attributo è dipendente dagli altri attributi, allora potrebbe essere utile fare un'entità separata (es. città e regione sono dipendenti tra loro)</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="schema-logico"><a class="header" href="#schema-logico">Schema logico</a></h1>
+<p>Una volta che siamo soddisfatti con lo schema concettuale, possiamo passare a convertirlo nello schema logico che poi potrà essere implementato nel DBMS.</p>
+<p>Per fare questo passaggio, ci sono alcune regole che dobbiamo seguire.</p>
+<h2 id="entità-ed-attributi"><a class="header" href="#entità-ed-attributi">Entità ed attributi</a></h2>
+<p>Per le entità valgono le seguenti regole:</p>
+<ul>
+<li>ogni entità diventa una tabella</li>
+<li>le tabelle si rappresentano con la sintassi <code>nometabella()</code></li>
+<li>il nome delle entità diventa il nome della tabella, <em>convertito al plurale</em> e con la lettera minuscola (es. Utente diventa utenti)</li>
+<li>ogni attributo diventa un'attributo della tabella</li>
+<li>se la chiave primaria è <code>id</code>, si aggiunge il nome della tabella (al singolare), ad esempio <code>id_utente</code></li>
+<li>le chiavi primarie sono <ins>sottolineate</ins></li>
+</ul>
+<p>Riprendendo l'esempio del capitolo precedente:</p>
+<p>utenti(<ins>id_utente</ins>,nome,cognome)
+eventi(<ins>id_evento</ins>,titolo, costo)</p>
+<p>Queste tabelle ancora non sono complete perché mancano le chiavi esterne, che vedremo nel prossimo paragrafo.</p>
+<h2 id="relazioni-1"><a class="header" href="#relazioni-1">Relazioni</a></h2>
+<p>Per le relazioni valgono le seguenti regole:</p>
+<ul>
+<li>per le relazioni uno a molti (una molteplicità ha cardinalità massima <code>1</code>, l'altra <code>n</code>), si aggiunge una chiave esterna nel lato &quot;uno&quot; della relazione</li>
+<li>per le relazioni molti a molti (entrambe le molteplicità della relazione hanno cardinalità massima <code>n</code>), si crea una nuova tabella associativa, che contiene come attributi le chiavi esterne verso le due relazioni; bisogna anche aggiungere un vincolo di unicità della coppia di chiavi esterne</li>
+<li>per le relazioni uno a uno (entrambe le molteplicità hanno cardinalità massima <code>1</code>), si può procedere in diversi modi:</li>
+<li>le due tabelle possono diventare un'unica tabella che contiene gli attributi di entrambe le tabelle</li>
+<li>se non si vuole creare un'unica entità, si procede come nel caso delle relazioni molti a molti</li>
+<li>per le chiavi esterne si usa il <em>corsivo</em></li>
+</ul>
+<p>Completando l'esempio di prima:
+utenti(<ins>id_utente</ins>,nome,cognome)
+eventi(<ins>id_evento</ins>,titolo, costo, <em>organizzatore</em>)
+partecipanti(<ins>id_utente</ins>,<ins>id_evento</ins>)</p>
 
                     </main>
 
