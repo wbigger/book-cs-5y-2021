@@ -145,30 +145,37 @@
 <p>Per le entità valgono le seguenti regole:</p>
 <ul>
 <li>ogni entità diventa una tabella</li>
-<li>le tabelle si rappresentano con la sintassi <code>nometabella()</code></li>
-<li>il nome delle entità diventa il nome della tabella, <em>convertito al plurale</em> e con la lettera minuscola (es. Utente diventa utenti)</li>
-<li>ogni attributo diventa un'attributo della tabella</li>
-<li>se la chiave primaria è <code>id</code>, si aggiunge il nome della tabella (al singolare), ad esempio <code>id_utente</code></li>
+<li>le tabelle si rappresentano con la sintassi <code>nometabella(lista attributi)</code></li>
+<li>il nome dell'entità diventa il nome della tabella, <em>convertito al plurale</em> e con la lettera minuscola (es. Utente diventa utenti)</li>
+<li>ogni attributo dell'entità diventa un'attributo della tabella</li>
+<li>se la chiave primaria è <code>id</code>, si aggiunge il nome della tabella al singolare, ad esempio <code>id_utente</code></li>
 <li>le chiavi primarie sono <ins>sottolineate</ins></li>
 </ul>
 <p>Riprendendo l'esempio del capitolo precedente:</p>
-<p>utenti(<ins>id_utente</ins>,nome,cognome)
-eventi(<ins>id_evento</ins>,titolo, costo)</p>
+<ul>
+<li>utenti(<ins>id_utente</ins>,nome,cognome)</li>
+<li>eventi(<ins>id_evento</ins>,titolo, costo)</li>
+</ul>
 <p>Queste tabelle ancora non sono complete perché mancano le chiavi esterne, che vedremo nel prossimo paragrafo.</p>
 <h2 id="relazioni"><a class="header" href="#relazioni">Relazioni</a></h2>
 <p>Per le relazioni valgono le seguenti regole:</p>
 <ul>
-<li>per le relazioni uno a molti (una molteplicità ha cardinalità massima <code>1</code>, l'altra <code>n</code>), si aggiunge una chiave esterna nel lato &quot;uno&quot; della relazione</li>
-<li>per le relazioni molti a molti (entrambe le molteplicità della relazione hanno cardinalità massima <code>n</code>), si crea una nuova tabella associativa, che contiene come attributi le chiavi esterne verso le due relazioni; bisogna anche aggiungere un vincolo di unicità della coppia di chiavi esterne</li>
-<li>per le relazioni uno a uno (entrambe le molteplicità hanno cardinalità massima <code>1</code>), si può procedere in diversi modi:</li>
-<li>le due tabelle possono diventare un'unica tabella che contiene gli attributi di entrambe le tabelle</li>
-<li>se non si vuole creare un'unica entità, si procede come nel caso delle relazioni molti a molti</li>
+<li>per le relazioni uno a molti si aggiunge una chiave esterna nel lato &quot;uno&quot; della relazione</li>
+<li>per le relazioni molti a molti, si crea una nuova tabella associativa, che contiene come attributi le chiavi esterne verso le due relazioni; bisogna anche aggiungere un vincolo di unicità della coppia di chiavi esterne</li>
+<li>per le relazioni uno a uno si può procedere in diversi modi:
+<ul>
+<li>le due tabelle possono diventare un'unica tabella che contiene tutti gli attributi</li>
+<li>se non si vuole creare un'unica tabella, si procede come nel caso delle relazioni uno a molti, scegliendo come entità che ha la chiave esterna quella più dipendente dall'altra (es. dettagli_utente dipende concettualmente da utente e quindi andrà a contenere la chiave esterna)</li>
+</ul>
+</li>
 <li>per le chiavi esterne si usa il <em>corsivo</em></li>
 </ul>
-<p>Completando l'esempio di prima:
-utenti(<ins>id_utente</ins>,nome,cognome)
-eventi(<ins>id_evento</ins>,titolo, costo, <em>organizzatore</em>)
-partecipanti(<ins>id_utente</ins>,<ins>id_evento</ins>)</p>
+<p>Completando l'esempio di prima:</p>
+<ul>
+<li>utenti(<ins>id_utente</ins>, nome, cognome)</li>
+<li>eventi(<ins>id_evento</ins>, titolo, costo, <em>organizzatore</em>)</li>
+<li>partecipanti(<ins>id_utente</ins>, <ins>id_evento</ins>)</li>
+</ul>
 
                     </main>
 
