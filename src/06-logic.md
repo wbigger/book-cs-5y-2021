@@ -30,9 +30,9 @@ Per le relazioni valgono le seguenti regole:
     - se non si vuole creare un'unica tabella, si procede come nel caso delle relazioni uno a molti, scegliendo come entità che ha la chiave esterna quella più dipendente dall'altra (es. dettagli_utente dipende concettualmente da utente e quindi andrà a contenere la chiave esterna)
 - per le chiavi esterne si usa il _corsivo_
 
-Completando l'esempio di prima:
+Completando l'esempio di prima, la relazione è n-n, quindi aggiungo una tabella associativa in cui la coppia:
 
 - utenti(<ins>id_utente</ins>, nome, cognome)
 - eventi(<ins>id_evento</ins>, titolo, costo, _organizzatore_)
-- partecipanti(<ins>id_utente</ins>, <ins>id_evento</ins>)
+- partecipanti(_<ins>id_utente</ins>_, _<ins>id_evento</ins>_)
 
