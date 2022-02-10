@@ -57,6 +57,19 @@ show tables;
 ```
 </details>
 
+
+###
+**show columns from** _nome_tabella_**;**<br>
+*Elenca le colonne di una tabella e le caratteristiche di ogni colonna*
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+show columns from utenti;
+```
+</details>
+
+
 ###
 **use** _nome_database_**;**<br>
 *Seleziona un database*
