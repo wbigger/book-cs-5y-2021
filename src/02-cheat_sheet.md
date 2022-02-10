@@ -333,6 +333,13 @@ from eventi
 join utenti on eventi.organizzatore=utenti.utente_id;
 ```
 
+```sql
+select eventi.titolo, utenti.nome, utenti.cognome
+from partecipanti
+join eventi using(evento_id)
+join utenti using(utente_id);
+```
+
 </details>
 
 La clausola `join` può essere usata insieme alle clausole `where` o `order by` per filtrare ed organizzare ulteriormente i risultati.
