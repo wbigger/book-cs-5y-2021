@@ -239,6 +239,14 @@
 </code></pre>
 </details>
 <h3 id="-2"><a class="header" href="#-2"></a></h3>
+<p><strong>show columns from</strong> <em>nome_tabella</em><strong>;</strong><br>
+<em>Elenca le colonne di una tabella e le caratteristiche di ogni colonna</em></p>
+<details closed> 
+<summary>Esempi</summary>
+<pre><code class="language-sql">show columns from utenti;
+</code></pre>
+</details>
+<h3 id="-3"><a class="header" href="#-3"></a></h3>
 <p><strong>use</strong> <em>nome_database</em><strong>;</strong><br>
 <em>Seleziona un database</em></p>
 <details closed> 
@@ -258,7 +266,7 @@
 <pre><code class="language-sql">create table studenti (nome varchar(100), cognome varchar(100), eta int unsigned);
 </code></pre>
 </details>
-<h3 id="-3"><a class="header" href="#-3"></a></h3>
+<h3 id="-4"><a class="header" href="#-4"></a></h3>
 <p><strong>primary key</strong><br>
 <em>Indica una o più colonne che identificano in modo univoco una riga. In italiano: chiave primaria.</em></p>
 <details closed> 
@@ -270,7 +278,7 @@
 <pre><code class="language-sql">create table telefoni (modello char(10) primary key, disponibilita int);
 </code></pre>
 </details>
-<h3 id="-4"><a class="header" href="#-4"></a></h3>
+<h3 id="-5"><a class="header" href="#-5"></a></h3>
 <p><strong>auto_increment</strong><br>
 <em>Incrementa il valore di una colonna ogni volta che viene aggiunta una riga</em></p>
 <details closed> 
@@ -278,7 +286,7 @@
 <pre><code class="language-sql">create table prodotti (id int primary key auto_increment, nome varchar(255));
 </code></pre>
 </details>
-<h3 id="-5"><a class="header" href="#-5"></a></h3>
+<h3 id="-6"><a class="header" href="#-6"></a></h3>
 <p><strong>foreign key</strong> <br>
 <em>Crea un riferimento ad una chiave primaria di un'altra tabella. In italiano: chiave esterna.</em></p>
 <p>Spesso le tabelle hanno dei riferimenti le une con le altre. Pensiamo ad esempio alle tabelle &quot;eventi&quot; e &quot;utenti&quot;. Ogni evento ha un organizzatore (uno solo), quindi vorremmo poter inserire questa informazione nel nostro database. Per fare questa operazione abbiamo bisogno di una chiave esterna.</p>
@@ -425,6 +433,11 @@ order by cognome,nome,età desc;
 <pre><code class="language-sql">select eventi.titolo, utenti.nome, utenti.cognome
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id;
+</code></pre>
+<pre><code class="language-sql">select eventi.titolo, utenti.nome, utenti.cognome
+from partecipanti
+join eventi using(evento_id)
+join utenti using(utente_id);
 </code></pre>
 </details>
 <p>La clausola <code>join</code> può essere usata insieme alle clausole <code>where</code> o <code>order by</code> per filtrare ed organizzare ulteriormente i risultati.</p>
@@ -821,20 +834,6 @@ join utenti as u
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
