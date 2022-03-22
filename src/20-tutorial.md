@@ -280,6 +280,10 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";
 
+// Create a SQL query here...
+
+// Create the HTML elements of the list here, using query results...
+
 ?>
 ```
 
