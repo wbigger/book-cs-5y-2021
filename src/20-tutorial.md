@@ -206,14 +206,20 @@ Aggiungiamo quindi i servizi necessari:
       - 80:80
 
   php:
-    image: php:fpm
+    build:
+      dockerfile: Dockerfile
+      context: .
     volumes:
       - ./code:/code
 ```
 
-In questo snippet vediamo un'altra proprietà fondamentale di docker: la proprietà `volumes`. Ci serve per mappare una cartella sulla macchina host (sempre a sinistra dei due punti) in una cartella nel container.
+In questo snippet vediamo altre proprietà fondamentale di docker, descritte di seguito.
 
-In particolare, qui stiamo dicendo che la cartella che conterrà il codice è `./code` nella macchina host e `/code` nel container. Per configurare i container in modo da cercare il codice da servire in `/code` (che non è la cartella di default) e per far funzionare l'interprete PHP, dobbiamo modificare il file di configurazione del web server attraverso il file `nginx.conf`.
+Ricordatevi che prima di provare ad accedere al web server, aprite anche la porta 80 sulla nostra macchina AWS come visto in precedenza, e riavviate docker-compose.
+
+
+### Proprietà volumes
+La proprietà `volumes` ci serve per mappare una cartella sulla macchina host (sempre a sinistra dei due punti) in una cartella nel container. In particolare, qui stiamo dicendo che la cartella che conterrà il codice è `./code` nella macchina host e `/code` nel container. Per configurare i container in modo da cercare il codice da servire in `/code` (che non è la cartella di default) e per far funzionare l'interprete PHP, dobbiamo modificare il file di configurazione del web server attraverso il file `nginx.conf`.
 
 Creiamo quindi questo file e riempiamolo in questo modo:
 
@@ -244,7 +250,14 @@ Osserviamo in particolare 2 righe:
 
 > Tutti i container in una stack docker sono messi in rete tra di loro, per raggiungersi tra di loro si usa il dns interno che crea dei nomi identici al nome del servizio.
 
-Prima di provare ad accedere al web server, ricordiamoci di aprire anche la porta 80 sulla nostra macchina AWS, come visto in precedenza.
+### Proprietà build
+La proprietà `build` ci serve per modificare un'immagine in base alle nostre esigenze, ed è usata in alternativa alla prorpietà `image`. In questo caso dobbiamo aggiungere la libreria mysqli al container php standard. Per fare questo, abbiamo detto a docker di usare un `Dockerfile` nella cartella corrente (`.`). Andiamo quindi a creare un nuovo file, chiamato `Dockerfile`, sempre nella cartella barbiere. Il contenuto deve essere come segue:
+
+```dockerfile
+FROM php:fpm
+
+RUN docker-php-ext-install mysqli
+```
 
 ## Creazione di un file di prova
 A questo punto ci manca solo di fare un file di prova.
