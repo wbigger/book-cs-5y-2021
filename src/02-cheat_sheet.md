@@ -57,6 +57,19 @@ show tables;
 ```
 </details>
 
+
+###
+**show columns from** _nome_tabella_**;**<br>
+*Elenca le colonne di una tabella e le caratteristiche di ogni colonna*
+<details closed> 
+<summary>Esempi</summary>
+
+```sql
+show columns from utenti;
+```
+</details>
+
+
 ###
 **use** _nome_database_**;**<br>
 *Seleziona un database*
@@ -318,6 +331,13 @@ Quando usiamo colonne da più tabelle, è bene specificare sempre anche la tabel
 select eventi.titolo, utenti.nome, utenti.cognome
 from eventi
 join utenti on eventi.organizzatore=utenti.utente_id;
+```
+
+```sql
+select eventi.titolo, utenti.nome, utenti.cognome
+from partecipanti
+join eventi using(evento_id)
+join utenti using(utente_id);
 ```
 
 </details>
