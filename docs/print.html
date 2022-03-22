@@ -951,6 +951,12 @@ db_1  | 2022-03-22  7:22:58 0 [Note] InnoDB: Buffer pool(s) load completed at 22
 <p>Inserire come nome utente <code>root</code> e come password quella inserita nel file <code>stack.yml</code>.</p>
 <h2 id="configurare-il-web-server-e-php"><a class="header" href="#configurare-il-web-server-e-php">Configurare il web server e PHP</a></h2>
 <p>Ora passiamo ad installare un web server con il supporto PHP.</p>
+<p>Per prima cosa creiamo la cartella dove andremo a mettere il codice della pagina:</p>
+<pre><code class="language-sh">mkdir code
+</code></pre>
+<blockquote>
+<p>Nota: se non si crea ora la cartella, quando si farà il docker-compose verrà creata automaticamente ma con i permessi root, senza quindi possibilità di modificarla. In questo caso cancellatela con il comando <code>rmdir</code> e ricreatela a mano come fatto qui sopra.</p>
+</blockquote>
 <p>Per il web server useremo <a href="https://www.nginx.com/">Nginx</a>, che rispetto al rivale Apache è più piccolo e leggero e quindi adatto al nostro contesto.</p>
 <p>Per il PHP, non installeremo direttamente l'interprete sulla macchina del web server, ma creeremo un container dedicato. Metteremo i due container in comunicazione attraverso una tecnica che si chiama &quot;FastCGI&quot;, che permette a più applicazioni di comunicare tra di loro attraverso la rete.</p>
 <p>Aggiungiamo quindi i servizi necessari:</p>
@@ -971,7 +977,7 @@ db_1  | 2022-03-22  7:22:58 0 [Note] InnoDB: Buffer pool(s) load completed at 22
 </code></pre>
 <p>In questo snippet vediamo altre proprietà fondamentale di docker, descritte di seguito.</p>
 <p>Ricordatevi che prima di provare ad accedere al web server, aprite anche la porta 80 sulla nostra macchina AWS come visto in precedenza, e riavviate docker-compose.</p>
-<h3 id="proprietà-volumes"><a class="header" href="#proprietà-volumes">Proprietà volumes</a></h3>
+<h3 id="proprietà-volumes"><a class="header" href="#proprietà-volumes">Proprietà: volumes</a></h3>
 <p>La proprietà <code>volumes</code> ci serve per mappare una cartella sulla macchina host (sempre a sinistra dei due punti) in una cartella nel container. In particolare, qui stiamo dicendo che la cartella che conterrà il codice è <code>./code</code> nella macchina host e <code>/code</code> nel container. Per configurare i container in modo da cercare il codice da servire in <code>/code</code> (che non è la cartella di default) e per far funzionare l'interprete PHP, dobbiamo modificare il file di configurazione del web server attraverso il file <code>nginx.conf</code>.</p>
 <p>Creiamo quindi questo file e riempiamolo in questo modo:</p>
 <pre><code class="language-conf">server {
@@ -1001,15 +1007,15 @@ db_1  | 2022-03-22  7:22:58 0 [Note] InnoDB: Buffer pool(s) load completed at 22
 <blockquote>
 <p>Tutti i container in una stack docker sono messi in rete tra di loro, per raggiungersi tra di loro si usa il dns interno che crea dei nomi identici al nome del servizio.</p>
 </blockquote>
-<h3 id="proprietà-build"><a class="header" href="#proprietà-build">Proprietà build</a></h3>
+<h3 id="proprietà-build"><a class="header" href="#proprietà-build">Proprietà: build</a></h3>
 <p>La proprietà <code>build</code> ci serve per modificare un'immagine in base alle nostre esigenze, ed è usata in alternativa alla prorpietà <code>image</code>. In questo caso dobbiamo aggiungere la libreria mysqli al container php standard. Per fare questo, abbiamo detto a docker di usare un <code>Dockerfile</code> nella cartella corrente (<code>.</code>). Andiamo quindi a creare un nuovo file, chiamato <code>Dockerfile</code>, sempre nella cartella barbiere. Il contenuto deve essere come segue:</p>
 <pre><code class="language-dockerfile">FROM php:fpm
 
 RUN docker-php-ext-install mysqli
 </code></pre>
 <h2 id="creazione-di-un-file-di-prova"><a class="header" href="#creazione-di-un-file-di-prova">Creazione di un file di prova</a></h2>
-<p>A questo punto ci manca solo di fare un file di prova.</p>
-<p>Creiamo dentro <code>./code</code> un <code>index.php</code> di esempio:</p>
+<p>A questo punto ci manca solo di fare una prova per verificare che tutto funzioni.</p>
+<p>Creiamo dentro <code>./code</code> un file <code>index.php</code> di esempio:</p>
 <pre><code class="language-php">&lt;?php echo &quot;Ciao sono un file PHP!&quot;;
 
 $servername = &quot;db&quot;;
@@ -1027,12 +1033,13 @@ echo &quot;Connected successfully&quot;;
 
 ?&gt;
 </code></pre>
-<p>Anche in questo caso, come servername abbiamo usato il nome del servizio del db. Configurare la password secondo le proprie esigenze, in accordo con il file stack.yml.</p>
+<p>Anche in questo caso, come servername abbiamo usato il nome del servizio docker del database, ovvero <code>db</code>. Configurare la password secondo le proprie esigenze, in accordo con il file stack.yml.</p>
 <p>A questo punto, se aprendo il browser trovate &quot;Connected successfully&quot;, tutto è andato a buon fine!</p>
 <blockquote>
 <p>Ricordatevi sempre di riavviare docker-compose dopo aver modificato il file stack.yml!</p>
 </blockquote>
 <h3 id="esempio-completo-php"><a class="header" href="#esempio-completo-php">Esempio completo PHP</a></h3>
+<p>Di seguito un esempio completo di PHP, con connessione al database e query.</p>
 <p>Immaginiamo di avere un database <code>musica</code> con all'interno una tabella <code>brani</code> con gli attributi <code>titolo</code> e <code>durata</code>. Per creare una pagina con una lista di tutti i brani, possiamo usare il seguente codice.</p>
 <pre><code class="language-php">&lt;?php
 

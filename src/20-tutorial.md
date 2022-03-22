@@ -190,6 +190,14 @@ Inserire come nome utente `root` e come password quella inserita nel file `stack
 ## Configurare il web server e PHP
 Ora passiamo ad installare un web server con il supporto PHP.
 
+Per prima cosa creiamo la cartella dove andremo a mettere il codice della pagina:
+
+```sh
+mkdir code
+```
+
+> Nota: se non si crea ora la cartella, quando si farà il docker-compose verrà creata automaticamente ma con i permessi root, senza quindi possibilità di modificarla. In questo caso cancellatela con il comando `rmdir` e ricreatela a mano come fatto qui sopra.
+
 Per il web server useremo [Nginx](https://www.nginx.com/), che rispetto al rivale Apache è più piccolo e leggero e quindi adatto al nostro contesto.
 
 Per il PHP, non installeremo direttamente l'interprete sulla macchina del web server, ma creeremo un container dedicato. Metteremo i due container in comunicazione attraverso una tecnica che si chiama "FastCGI", che permette a più applicazioni di comunicare tra di loro attraverso la rete.
@@ -218,7 +226,7 @@ In questo snippet vediamo altre proprietà fondamentale di docker, descritte di 
 Ricordatevi che prima di provare ad accedere al web server, aprite anche la porta 80 sulla nostra macchina AWS come visto in precedenza, e riavviate docker-compose.
 
 
-### Proprietà volumes
+### Proprietà: volumes
 La proprietà `volumes` ci serve per mappare una cartella sulla macchina host (sempre a sinistra dei due punti) in una cartella nel container. In particolare, qui stiamo dicendo che la cartella che conterrà il codice è `./code` nella macchina host e `/code` nel container. Per configurare i container in modo da cercare il codice da servire in `/code` (che non è la cartella di default) e per far funzionare l'interprete PHP, dobbiamo modificare il file di configurazione del web server attraverso il file `nginx.conf`.
 
 Creiamo quindi questo file e riempiamolo in questo modo:
@@ -250,7 +258,7 @@ Osserviamo in particolare 2 righe:
 
 > Tutti i container in una stack docker sono messi in rete tra di loro, per raggiungersi tra di loro si usa il dns interno che crea dei nomi identici al nome del servizio.
 
-### Proprietà build
+### Proprietà: build
 La proprietà `build` ci serve per modificare un'immagine in base alle nostre esigenze, ed è usata in alternativa alla prorpietà `image`. In questo caso dobbiamo aggiungere la libreria mysqli al container php standard. Per fare questo, abbiamo detto a docker di usare un `Dockerfile` nella cartella corrente (`.`). Andiamo quindi a creare un nuovo file, chiamato `Dockerfile`, sempre nella cartella barbiere. Il contenuto deve essere come segue:
 
 ```dockerfile
@@ -260,9 +268,9 @@ RUN docker-php-ext-install mysqli
 ```
 
 ## Creazione di un file di prova
-A questo punto ci manca solo di fare un file di prova.
+A questo punto ci manca solo di fare una prova per verificare che tutto funzioni.
 
-Creiamo dentro `./code` un `index.php` di esempio:
+Creiamo dentro `./code` un file `index.php` di esempio:
 
 ```php
 <?php echo "Ciao sono un file PHP!";
@@ -283,13 +291,15 @@ echo "Connected successfully";
 ?>
 ```
 
-Anche in questo caso, come servername abbiamo usato il nome del servizio del db. Configurare la password secondo le proprie esigenze, in accordo con il file stack.yml.
+Anche in questo caso, come servername abbiamo usato il nome del servizio docker del database, ovvero `db`. Configurare la password secondo le proprie esigenze, in accordo con il file stack.yml.
 
 A questo punto, se aprendo il browser trovate "Connected successfully", tutto è andato a buon fine!
 
 > Ricordatevi sempre di riavviare docker-compose dopo aver modificato il file stack.yml!
 
 ### Esempio completo PHP
+Di seguito un esempio completo di PHP, con connessione al database e query.
+
 Immaginiamo di avere un database `musica` con all'interno una tabella `brani` con gli attributi `titolo` e `durata`. Per creare una pagina con una lista di tutti i brani, possiamo usare il seguente codice.
 
 ```php
