@@ -237,6 +237,9 @@ services:
 <blockquote>
 <p>L'immagine mariadb viene scaricata dall'hub ufficiale di docker, <a href="hub.docker.com">hub.docker.com</a>.</p>
 </blockquote>
+<p>Per avviare la stack, usiamo il seguente comando.</p>
+<pre><code class="language-sh">docker-compose -f stack.yml up
+</code></pre>
 <p>Se tutto va bene, dovreste alla fine vedere qualcosa del genere.</p>
 <pre><code class="language-sh">Creating barbiere_db_1 ... done
 Attaching to barbiere_db_1
@@ -369,6 +372,20 @@ echo &quot;Connected successfully&quot;;
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>

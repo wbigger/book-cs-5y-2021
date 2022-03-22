@@ -142,6 +142,11 @@ Con queste righe, sto dicendo di creare un nuovo _servizio_, che chiamo `db`, l'
 
 > L'immagine mariadb viene scaricata dall'hub ufficiale di docker, [hub.docker.com](hub.docker.com).
 
+Per avviare la stack, usiamo il seguente comando.
+
+```sh
+docker-compose -f stack.yml up
+```
 
 Se tutto va bene, dovreste alla fine vedere qualcosa del genere.
 
