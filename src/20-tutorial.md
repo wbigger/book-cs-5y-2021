@@ -163,7 +163,7 @@ Il nostro server è up! Ma come facciamo ad interrogarlo? Installiamo un pannell
 Aggiungiamo a `stack.yml` un nuovo servizio:
 
 ```yml
-adminer:
+  adminer:
     image: adminer
     restart: always
     ports:

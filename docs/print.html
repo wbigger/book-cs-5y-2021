@@ -932,7 +932,7 @@ db_1  | 2022-03-22  7:22:58 0 [Note] InnoDB: Buffer pool(s) load completed at 22
 </code></pre>
 <p>Il nostro server è up! Ma come facciamo ad interrogarlo? Installiamo un pannello di amministrazione. Useremo <em>Adminer</em>, che è la nuova versione di phpMyAdmin.</p>
 <p>Aggiungiamo a <code>stack.yml</code> un nuovo servizio:</p>
-<pre><code class="language-yml">adminer:
+<pre><code class="language-yml">  adminer:
     image: adminer
     restart: always
     ports:
