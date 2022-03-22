@@ -4,7 +4,7 @@ Per il tutorial useremo AWS Academy che non richiede una carta di credito per fa
 
 ## Login
 
-Andare su [AWS Academy][https://www.awsacademy.com/SiteLogin] e fare il login. 
+Andare su [AWS Academy](https://www.awsacademy.com/SiteLogin) e fare il login. 
 
 Tra i corsi disponibili, andare su "AWS Academy Learner Lab", quindi su Moduli -> Learner Lab Foundational Services -> Start Lab.
 
