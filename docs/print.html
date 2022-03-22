@@ -1025,10 +1025,6 @@ if ($conn-&gt;connect_error) {
 }
 echo &quot;Connected successfully&quot;;
 
-// Create a SQL query here...
-
-// Create the HTML elements of the list here, using query results...
-
 ?&gt;
 </code></pre>
 <p>Anche in questo caso, come servername abbiamo usato il nome del servizio del db. Configurare la password secondo le proprie esigenze, in accordo con il file stack.yml.</p>
@@ -1036,6 +1032,42 @@ echo &quot;Connected successfully&quot;;
 <blockquote>
 <p>Ricordatevi sempre di riavviare docker-compose dopo aver modificato il file stack.yml!</p>
 </blockquote>
+<h3 id="esempio-completo-php"><a class="header" href="#esempio-completo-php">Esempio completo PHP</a></h3>
+<p>Immaginiamo di avere un database <code>musica</code> con all'interno una tabella <code>brani</code> con gli attributi <code>titolo</code> e <code>durata</code>. Per creare una pagina con una lista di tutti i brani, possiamo usare il seguente codice.</p>
+<pre><code class="language-php">&lt;?php
+
+$servername = &quot;db&quot;;
+$username = &quot;root&quot;;
+$password = &quot;example&quot;;
+$database = &quot;musica&quot;;
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn-&gt;connect_error) {
+  die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
+}
+//echo &quot;Connected successfully&quot;;
+
+// Create a SQL query here...
+if ($result = $conn -&gt; query(&quot;SELECT * FROM brani&quot;)) {
+  echo &quot;&lt;ul&gt;&quot;;
+  //  echo &quot;Returned rows are: &quot; . $result -&gt; num_rows;
+  while ($row = $result-&gt;fetch_assoc()) {
+    printf (&quot;&lt;li&gt;%s (%s seconds)&lt;/li&gt;&quot;, $row[&quot;titolo&quot;], $row[&quot;durata&quot;]);
+  }
+  echo &quot;&lt;/ul&gt;&quot;;
+  // Free result set
+  $result -&gt; free_result();
+}
+
+$conn -&gt; close();
+
+// Create the HTML elements of the list here, using query results...
+
+?&gt;
+</code></pre>
 <h2 id="riepilogo"><a class="header" href="#riepilogo">Riepilogo</a></h2>
 <p>Rivediamo cosa abbiamo fatto.</p>
 <ul>

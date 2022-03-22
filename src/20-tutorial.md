@@ -280,10 +280,6 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";
 
-// Create a SQL query here...
-
-// Create the HTML elements of the list here, using query results...
-
 ?>
 ```
 
@@ -293,6 +289,44 @@ A questo punto, se aprendo il browser trovate "Connected successfully", tutto è
 
 > Ricordatevi sempre di riavviare docker-compose dopo aver modificato il file stack.yml!
 
+### Esempio completo PHP
+Immaginiamo di avere un database `musica` con all'interno una tabella `brani` con gli attributi `titolo` e `durata`. Per creare una pagina con una lista di tutti i brani, possiamo usare il seguente codice.
+
+```php
+<?php
+
+$servername = "db";
+$username = "root";
+$password = "example";
+$database = "musica";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+//echo "Connected successfully";
+
+// Create a SQL query here...
+if ($result = $conn -> query("SELECT * FROM brani")) {
+  echo "<ul>";
+  //  echo "Returned rows are: " . $result -> num_rows;
+  while ($row = $result->fetch_assoc()) {
+    printf ("<li>%s (%s seconds)</li>", $row["titolo"], $row["durata"]);
+  }
+  echo "</ul>";
+  // Free result set
+  $result -> free_result();
+}
+
+$conn -> close();
+
+// Create the HTML elements of the list here, using query results...
+
+?>
+```
 
 ## Riepilogo
 Rivediamo cosa abbiamo fatto.
