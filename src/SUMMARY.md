@@ -14,3 +14,5 @@
 <!-- - [Frameworks](./20-index.md)
     - [Backend](./20-backend.md)
     - [Frontend](./20-frontend.md) -->
+- [Cloud](./20-README.md)
+    - [Cloud tutorial](./20-tutorial.md)

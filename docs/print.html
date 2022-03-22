@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="01-chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="02-cheat_sheet.html"><strong aria-hidden="true">1.1.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="03-relationships.html"><strong aria-hidden="true">1.2.</strong> Relazioni</a></li><li class="chapter-item expanded "><a href="04-requirements.html"><strong aria-hidden="true">1.3.</strong> Raccolta dei requisiti</a></li><li class="chapter-item expanded "><a href="05-er_model.html"><strong aria-hidden="true">1.4.</strong> Schema concettuale</a></li><li class="chapter-item expanded "><a href="06-logic.html"><strong aria-hidden="true">1.5.</strong> Schema logico</a></li></ol></li><li class="chapter-item expanded "><a href="10-mvc.html"><strong aria-hidden="true">2.</strong> MVC</a></li><li class="chapter-item expanded "><a href="10-rest.html"><strong aria-hidden="true">3.</strong> REST API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="10-rest-op.html"><strong aria-hidden="true">3.1.</strong> Operazioni REST</a></li><li class="chapter-item expanded "><a href="10-tools.html"><strong aria-hidden="true">3.2.</strong> Tools</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01-chapter_1.html"><strong aria-hidden="true">1.</strong> Introduzione ai database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="02-cheat_sheet.html"><strong aria-hidden="true">1.1.</strong> Cheat Sheet</a></li><li class="chapter-item expanded "><a href="03-relationships.html"><strong aria-hidden="true">1.2.</strong> Relazioni</a></li><li class="chapter-item expanded "><a href="04-requirements.html"><strong aria-hidden="true">1.3.</strong> Raccolta dei requisiti</a></li><li class="chapter-item expanded "><a href="05-er_model.html"><strong aria-hidden="true">1.4.</strong> Schema concettuale</a></li><li class="chapter-item expanded "><a href="06-logic.html"><strong aria-hidden="true">1.5.</strong> Schema logico</a></li></ol></li><li class="chapter-item expanded "><a href="10-mvc.html"><strong aria-hidden="true">2.</strong> MVC</a></li><li class="chapter-item expanded "><a href="10-rest.html"><strong aria-hidden="true">3.</strong> REST API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="10-rest-op.html"><strong aria-hidden="true">3.1.</strong> Operazioni REST</a></li><li class="chapter-item expanded "><a href="10-tools.html"><strong aria-hidden="true">3.2.</strong> Tools</a></li></ol></li><li class="chapter-item expanded "><a href="20-README.html"><strong aria-hidden="true">4.</strong> Cloud</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="20-tutorial.html"><strong aria-hidden="true">4.1.</strong> Cloud tutorial</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -796,7 +796,7 @@ join utenti as u
 <p>Approfondimento sul concetto di idempotenza <a href="http://blog.loris.tissino.it/2013/06/http-rest-e-api.html">qui</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tools"><a class="header" href="#tools">Tools</a></h1>
 <p>Per definire e testare le REST API, ci sono diversi strumenti molto utili, di seguito ne descriviamo un paio.</p>
-<h2 id="postman"><a class="header" href="#postman">POSTMAN</a></h2>
+<h2 id="postman"><a class="header" href="#postman">Postman</a></h2>
 <p><a href="https://www.postman.com/">Postman</a> è una piattaforma pensata principalmente per il test di un server già esistente. Fornisce moltissimi strumenti per automatizzare i test, dando la possibilità di creare anche scenari complessi con diversi variabili ambientali. </p>
 <img class="w100p" title="postman" alt="postman screenshot" src="assets/postman.png">
 <p>Fornisce anche la possibilità di creare automaticamente la documentazione, oppure di fare il design di nuove API. </p>
@@ -806,6 +806,218 @@ join utenti as u
 <img class="w100p" title="swagger" alt="swagger screenshot" src="assets/swagger.png">
 <p>Swagger da la possibilità di creare un server di mockup che genera le risposte alle chiamate HTTP esattamente come sono state definite.</p>
 <p>Anche Swagger ha una funzionalità che si chiama <a href="https://swagger.io/tools/swagger-inspector/">Inspector</a> che permette di fare il test delle API su un server esistente. In questo caso, è richiesto che all'interno del server da testare sia presente un file <code>swagger.json</code> con la definizione delle chiamate fornite dal server stesso. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cloud"><a class="header" href="#cloud">Cloud</a></h1>
+<p>In questo capitolo ci occuperemo di capire come funziona il cloud. Useremo AWS come piattaforma. Useremo anche docker per installare facilmente appliacazioni nella nostra macchina virtuale.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cloud-tutorial"><a class="header" href="#cloud-tutorial">Cloud tutorial</a></h1>
+<p>Per il tutorial useremo AWS Academy che non richiede una carta di credito per fare l'account. Dovrete usare il vostro indirizzo email della scuola</p>
+<h2 id="login"><a class="header" href="#login">Login</a></h2>
+<p>Andare su [AWS Academy][https://www.awsacademy.com/SiteLogin] e fare il login. </p>
+<p>Tra i corsi disponibili, andare su &quot;AWS Academy Learner Lab&quot;, quindi su Moduli -&gt; Learner Lab Foundational Services -&gt; Start Lab.</p>
+<p>Aspettare qualche secondo che il pallino vicino ad AWS da rosso diventi verde, quindi cliccarci sopra.</p>
+<p>Importante: ricordarsi sempre di chiudere la sessione del laboratorio quando si ha finito con gli esercizi, per non sprecare credito. Si consiglia anche di interromprere tutti i servizi (EC2, database, etc), perché non tutti vengono chiusi automaticamente.</p>
+<p>Ricordatevi di rimanere sempre in Virginia Settentrionale, altrimenti il vostro credito <em>non</em> funzionerà.</p>
+<h2 id="creare-unistanza"><a class="header" href="#creare-unistanza">Creare un'istanza</a></h2>
+<p>Ora vi ritrovate in una console reale di AWS!</p>
+<p>Dalla lista dei servizi in alto, selezionate EC2. Nella pagina che si apre, selezionate il bottone arancione per lanciare una nuova istanza. Lasciate tutto di default: Linux Amazon 2 AMI su x86 a 64bit, e t2.micro.</p>
+<p>Alla fine del processo, quando richiesto, usare la chiave vockey.pem. La chiave può essere scaricata in qualsiasi momento dal sito di AWS Academy andando su &quot;AWS Details&quot;, vicino al bottone &quot;Start Lab&quot; che abbiamo premuto prima. Si consiglia di rinominare subito la chiave appena scaricata in <code>vockey.pem</code>, per semplificare le operazioni successive.</p>
+<p>Non chiudere la finestra della dashboard, ci servirà in seguito.</p>
+<p><strong>CHECKPOINT</strong>
+Controllare sulla dashboard che l'istanza sia &quot;running&quot;.</p>
+<p class="centered img-container">
+<img class="centered w80p" title="EC2 running" alt="EC2 running" src="assets/ec2-running.png">
+</p>
+<h2 id="accedere-allistanza-da-terminale"><a class="header" href="#accedere-allistanza-da-terminale">Accedere all'istanza da terminale</a></h2>
+<p>Dal vostro computer, aprite il vostro terminale preferito, navigate nella cartella in cui si trova la chiave scaricata.</p>
+<p>Dalla console di AWS, selezionate l'istanza a cui volete connettervi, quindi andate in alto cliccate su &quot;Connect&quot;. Selezionate la tab &quot;SSH client&quot;. Solo la prima volta che avete scaricato la chiave, selezionate il comando al punto 3 <code>chmod...</code> per cambiare i permessi della chiave. Quindi selezionate il comando nell'esempio <code>ssh -i...</code> ed incollatelo nel vostro terminale.</p>
+<p>Se tutto è andato a buon fine, dovreste esservi collegati all'istanza.</p>
+<blockquote>
+<p>La prima volta vi chiederà conferma del fingerprint, scrivete yes e premete invio.</p>
+</blockquote>
+<h2 id="configurare-listanza-al-primo-avvio"><a class="header" href="#configurare-listanza-al-primo-avvio">Configurare l'istanza al primo avvio</a></h2>
+<p>Ora che siamo riusciti a connetterci l'istanza, dobbiamo configurarla per i nostri scopi.</p>
+<p>Quello che andiamo a fare, è installare sulla macchina remota gli eseguibili che ci serviranno per completare il progetto:</p>
+<ul>
+<li>docker</li>
+<li>docker-compose</li>
+<li>git</li>
+</ul>
+<p>Per configurare l'istanza, la prima volta copiate i seguenti comandi.</p>
+<p>Suggerimento: nel riquadro qui sotto, in alto a destra trovate l'icona delle pagine per copiare tutti i comandi in una volta sola.</p>
+<pre><code class="language-sh">sudo yum update -y
+
+# install docker
+sudo yum install docker -y
+# add docker to the admin group, so we can use it without sudo
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# add docker to startup services
+sudo chkconfig docker on
+sudo systemctl enable docker
+# install docker-compose
+sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+# install git
+sudo yum install git -y
+</code></pre>
+<p>Disconnettersi dalla macchina scrivendo <code>exit</code> o premendo <code>ctrl-d</code> e riconnettetevi. Controllate che sia andato tutto a buon fine con i seguenti comandi:</p>
+<pre><code class="language-sh">docker --version
+docker-compose --version
+git --version
+</code></pre>
+<p class="centered img-container">
+<img class="centered w80p" title="Remote-SSH" alt="Remote-SSH" src="assets/remote-versions.png">
+</p>
+<h1 id="docker-le-basi"><a class="header" href="#docker-le-basi">Docker: le basi</a></h1>
+<p>Docker è una piattaforma che permette di creare, testare e distribuire applicazioni velocemente. Raccoglie il software in unità standardizzate chiamate &quot;container&quot; che contengono tutto il necessario per la loro corretta esecuzione, incluse librerie, strumenti di sistema, codice e runtime.</p>
+<p class="centered img-container">
+<img class="centered w80p" title="Docker" alt="Docker" src="https://d1.awsstatic.com/Developer%20Marketing/containers/monolith_2-VM-vs-Containers.78f841efba175556d82f64d1779eb8b725de398d.png">
+</p>
+<p>I <em>container</em> sono delle <em>immagini</em> in esecuzione. Per avviare un container quindi dobbiamo prima avere la relativa immagine. Controlliamo le immagini nella nostra macchina con il seguente comando:</p>
+<p><strong>Checkpoint</strong>
+Eseguite il seguente comando:</p>
+<pre><code class="language-sh">docker image list
+</code></pre>
+<p>e controllate di avere un output del genere:</p>
+<p class="centered img-container">
+<img class="centered w80p" title="Remote-SSH" alt="Remote-SSH" src="assets/remote-docker-list.png">
+</p>
+<blockquote>
+<p>Se una volta ricollegati alla macchina remota, il comando docker image list non dovesse funzionare, lanciate il comando <code>sudo systemctl start docker</code> e riprovate.</p>
+</blockquote>
+<p>Per scaricare immagini e lanciare container, useremo lo script <code>docker-compose</code>.</p>
+<h2 id="creare-il-file-stackyml-per-docker-compose"><a class="header" href="#creare-il-file-stackyml-per-docker-compose">Creare il file stack.yml per docker compose</a></h2>
+<p>Creiamo una cartella <code>barbiere</code> dove metteremo i nostri file di progetto.</p>
+<pre><code class="language-sh">mkdir barbiere
+cd barbiere
+</code></pre>
+<p>Creiamo il file <code>stack.yml</code>.</p>
+<pre><code class="language-sh">nano stack.yml
+</code></pre>
+<p>A questo punto, inseriamo il codice che ci serve per scaricare ed avviare un database, ad esempio <code>mariadb</code>.</p>
+<pre><code class="language-yaml">version: '3.1'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+</code></pre>
+<p>Con queste righe, sto dicendo di creare un nuovo <em>servizio</em>, che chiamo <code>db</code>, l'immagine di partenza è <code>mariadb</code>, al riavvio di docker si deve sempre rilanciare e ha come variabile d'ambiente quella specificata.</p>
+<blockquote>
+<p>L'immagine mariadb viene scaricata dall'hub ufficiale di docker, <a href="hub.docker.com">hub.docker.com</a>.</p>
+</blockquote>
+<p>Se tutto va bene, dovreste alla fine vedere qualcosa del genere.</p>
+<pre><code class="language-sh">Creating barbiere_db_1 ... done
+Attaching to barbiere_db_1
+db_1  | 2022-03-22 07:22:51+00:00 [Note] [Entrypoint]: Entrypoint script for MariaDB Server 1:10.7.3+maria~focal started.
+...
+db_1  | 2022-03-22  7:22:58 0 [Note] InnoDB: Buffer pool(s) load completed at 220322  7:22:58
+</code></pre>
+<p>Il nostro server è up! Ma come facciamo ad interrogarlo? Installiamo un pannello di amministrazione. Useremo <em>Adminer</em>, che è la nuova versione di phpMyAdmin.</p>
+<p>Aggiungiamo a <code>stack.yml</code> un nuovo servizio:</p>
+<pre><code class="language-yml">adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+</code></pre>
+<p>L'ultima proprietà, <code>ports</code>, dice che la porta 8080 nella macchina AWS (host, a sinistra dei due punti) deve corrispondere alla porta 8080 del container (a sinistra dei due punti).</p>
+<p>Per rendere la configurazione operativa, interrompere docker-compose con CTRL-C e rilanciare il comando.</p>
+<p>Prima di provare ad accedere, però, devo ricordarmi di aprire la porta 8080 su AWS. Per fare questo, selezionare la macchina sulla console, selezionare in basso la tab Security, cliccare sul link nella sezione &quot;Security Groups&quot;, quindi in &quot;Inbound Rules&quot; selezionare &quot;Edit inbound rules&quot; -&gt; &quot;Add rule&quot;, come type lasciare Custom, come Port range inserire 8080 e come Source selezionare &quot;Anywhere IPv4&quot;. Salvare.</p>
+<p>Ora possiamo aprire un browser alla porta 8080 e controllare. Per l'indirizzo, dobbiamo tornare sulla console AWS, selezionare la macchina ed in basso trovare la voce &quot;Public DNS&quot;. Copiare il dns e ricordarsi di aggiungere alla fine <code>:8080</code>.</p>
+<blockquote>
+<p>Nota: il nostro sito non ha certificati, quindi assicurarsi sempre di usare http e non https.</p>
+</blockquote>
+<p class="centered img-container">
+<img class="centered w80p" title="Adminer" alt="Adminer" src="assets/adminer.png">
+</p>
+<p>Inserire come nome utente <code>root</code> e come password quella inserita nel file <code>stack.yml</code>.</p>
+<h2 id="configurare-il-web-server-e-php"><a class="header" href="#configurare-il-web-server-e-php">Configurare il web server e PHP</a></h2>
+<p>Ora passiamo ad installare un web server con il supporto PHP.</p>
+<p>Per il web server useremo <a href="https://www.nginx.com/">Nginx</a>, che rispetto al rivale Apache è più piccolo e leggero e quindi adatto al nostro contesto.</p>
+<p>Per il PHP, non installeremo direttamente l'interprete sulla macchina del web server, ma creeremo un container dedicato. Metteremo i due container in comunicazione attraverso una tecnica che si chiama &quot;FastCGI&quot;, che permette a più applicazioni di comunicare tra di loro attraverso la rete.</p>
+<p>Aggiungiamo quindi i servizi necessari:</p>
+<pre><code class="language-yml">  webserver:
+    image: nginx
+    volumes:
+      - ./code:/code
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+
+  php:
+    image: php:fpm
+    volumes:
+      - ./code:/code
+</code></pre>
+<p>In questo snippet vediamo un'altra proprietà fondamentale di docker: la proprietà <code>volumes</code>. Ci serve per mappare una cartella sulla macchina host (sempre a sinistra dei due punti) in una cartella nel container.</p>
+<p>In particolare, qui stiamo dicendo che la cartella che conterrà il codice è <code>./code</code> nella macchina host e <code>/code</code> nel container. Per configurare i container in modo da cercare il codice da servire in <code>/code</code> (che non è la cartella di default) e per far funzionare l'interprete PHP, dobbiamo modificare il file di configurazione del web server attraverso il file <code>nginx.conf</code>.</p>
+<p>Creiamo quindi questo file e riempiamolo in questo modo:</p>
+<pre><code class="language-conf">server {
+    listen 80;
+    index index.php index.html;
+    server_name localhost;
+    error_log  /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+    root /code;
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass php:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
+</code></pre>
+<p>Osserviamo in particolare 2 righe:</p>
+<ul>
+<li><code>root /code;</code> ci dice dove si trova il codice da servire</li>
+<li><code>fastcgi_pass php:9000;</code> ci dice dove si trova l'interprete php; notare che &quot;php&quot; è il nome dns automaticamente assegnato da docker al servizio php, in quanto è il proprio il nome del servizio!</li>
+</ul>
+<blockquote>
+<p>Tutti i container in una stack docker sono messi in rete tra di loro, per raggiungersi tra di loro si usa il dns interno che crea dei nomi identici al nome del servizio.</p>
+</blockquote>
+<p>Prima di provare ad accedere al web server, ricordiamoci di aprire anche la porta 80 sulla nostra macchina AWS, come visto in precedenza.</p>
+<h2 id="creazione-di-un-file-di-prova"><a class="header" href="#creazione-di-un-file-di-prova">Creazione di un file di prova</a></h2>
+<p>A questo punto ci manca solo di fare un file di prova.</p>
+<p>Creiamo dentro <code>./code</code> un <code>index.php</code> di esempio:</p>
+<pre><code class="language-php">&lt;?php echo &quot;Ciao sono un file PHP!&quot;;
+
+$servername = &quot;db&quot;;
+$username = &quot;root&quot;;
+$password = &quot;example&quot;;
+
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn-&gt;connect_error) {
+  die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
+}
+echo &quot;Connected successfully&quot;;
+
+?&gt;
+</code></pre>
+<p>Anche in questo caso, come servername abbiamo usato il nome del servizio del db. Configurare la password secondo le proprie esigenze, in accordo con il file stack.yml.</p>
+<p>A questo punto, se aprendo il browser trovate &quot;Connected successfully&quot;, tutto è andato a buon fine!</p>
+<blockquote>
+<p>Ricordatevi sempre di riavviare docker-compose dopo aver modificato il file stack.yml!</p>
+</blockquote>
+<h2 id="riepilogo"><a class="header" href="#riepilogo">Riepilogo</a></h2>
+<p>Rivediamo cosa abbiamo fatto.</p>
+<ul>
+<li>abbiamo creato una macchina virtuale sul cloud con Amazon Web Services</li>
+<li>ci siamo connessi all'istanza con un terminale SSH</li>
+<li>abbiamo configurato l'istanza con i comandi che ci servivano, in particolare <code>docker</code>, <code>docker-compose</code> e <code>git</code></li>
+<li>abbiamo creato un progetto template</li>
+<li>docker si è scaricato le dipendenze del nostro progetto template (<code>nginx</code>,<code>PHP</code>, <code>MySQL</code>, <code>PHP MyAdmin</code>)</li>
+<li>abbiamo aperto le porte necessarie nella nostra macchina remota</li>
+<li>la webapp è pronta all'uso</li>
+</ul>
 
                     </main>
 

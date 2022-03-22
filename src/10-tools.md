@@ -2,7 +2,7 @@
 
 Per definire e testare le REST API, ci sono diversi strumenti molto utili, di seguito ne descriviamo un paio.
 
-## POSTMAN
+## Postman
 [Postman](https://www.postman.com/) è una piattaforma pensata principalmente per il test di un server già esistente. Fornisce moltissimi strumenti per automatizzare i test, dando la possibilità di creare anche scenari complessi con diversi variabili ambientali. 
 
 <img class="w100p" title="postman" alt="postman screenshot" src="assets/postman.png">
