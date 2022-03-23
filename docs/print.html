@@ -1055,16 +1055,17 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn-&gt;connect_error) {
   die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
 }
+
 //echo &quot;Connected successfully&quot;;
 
-// Create a SQL query here...
+// Adapt your SQL query here
 if ($result = $conn -&gt; query(&quot;SELECT * FROM brani&quot;)) {
   echo &quot;&lt;ul&gt;&quot;;
-  //  echo &quot;Returned rows are: &quot; . $result -&gt; num_rows;
   while ($row = $result-&gt;fetch_assoc()) {
     printf (&quot;&lt;li&gt;%s (%s seconds)&lt;/li&gt;&quot;, $row[&quot;titolo&quot;], $row[&quot;durata&quot;]);
   }
   echo &quot;&lt;/ul&gt;&quot;;
+
   // Free result set
   $result -&gt; free_result();
 }
@@ -1081,9 +1082,10 @@ $conn -&gt; close();
 <li>abbiamo creato una macchina virtuale sul cloud con Amazon Web Services</li>
 <li>ci siamo connessi all'istanza con un terminale SSH</li>
 <li>abbiamo configurato l'istanza con i comandi che ci servivano, in particolare <code>docker</code>, <code>docker-compose</code> e <code>git</code></li>
-<li>abbiamo creato un progetto template</li>
-<li>docker si è scaricato le dipendenze del nostro progetto template (<code>nginx</code>,<code>PHP</code>, <code>MySQL</code>, <code>PHP MyAdmin</code>)</li>
+<li>abbiamo creato una stack docker con <code>stack.yml</code></li>
 <li>abbiamo aperto le porte necessarie nella nostra macchina remota</li>
+<li>docker, attraverso docker-compose, si è scaricato le dipendenze del nostro progetto template (<code>nginx</code>,<code>PHP</code>, <code>MySQL</code>, <code>PHP MyAdmin</code>)</li>
+<li>abbiamo creato un file php di esempio</li>
 <li>la webapp è pronta all'uso</li>
 </ul>
 

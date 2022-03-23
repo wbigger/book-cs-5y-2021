@@ -317,16 +317,17 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
+
 //echo "Connected successfully";
 
-// Create a SQL query here...
+// Adapt your SQL query here
 if ($result = $conn -> query("SELECT * FROM brani")) {
   echo "<ul>";
-  //  echo "Returned rows are: " . $result -> num_rows;
   while ($row = $result->fetch_assoc()) {
     printf ("<li>%s (%s seconds)</li>", $row["titolo"], $row["durata"]);
   }
   echo "</ul>";
+
   // Free result set
   $result -> free_result();
 }
@@ -344,7 +345,8 @@ Rivediamo cosa abbiamo fatto.
 - abbiamo creato una macchina virtuale sul cloud con Amazon Web Services
 - ci siamo connessi all'istanza con un terminale SSH
 - abbiamo configurato l'istanza con i comandi che ci servivano, in particolare `docker`, `docker-compose` e `git`
-- abbiamo creato un progetto template
-- docker si è scaricato le dipendenze del nostro progetto template (`nginx`,`PHP`, `MySQL`, `PHP MyAdmin`)
+- abbiamo creato una stack docker con `stack.yml`
 - abbiamo aperto le porte necessarie nella nostra macchina remota
+- docker, attraverso docker-compose, si è scaricato le dipendenze del nostro progetto template (`nginx`,`PHP`, `MySQL`, `PHP MyAdmin`)
+- abbiamo creato un file php di esempio
 - la webapp è pronta all'uso
