@@ -346,7 +346,7 @@ Rivediamo cosa abbiamo fatto.
 - ci siamo connessi all'istanza con un terminale SSH
 - abbiamo configurato l'istanza con i comandi che ci servivano, in particolare `docker`, `docker-compose` e `git`
 - abbiamo creato una stack docker con `stack.yml`
-- abbiamo aperto le porte necessarie nella nostra macchina remota
 - docker, attraverso docker-compose, si è scaricato le dipendenze del nostro progetto template (`nginx`,`PHP`, `MySQL`, `PHP MyAdmin`)
+- abbiamo aperto le porte necessarie nella nostra macchina remota
 - abbiamo creato un file php di esempio
 - la webapp è pronta all'uso
