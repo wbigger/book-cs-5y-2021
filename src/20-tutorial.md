@@ -334,8 +334,6 @@ if ($result = $conn -> query("SELECT * FROM brani")) {
 
 $conn -> close();
 
-// Create the HTML elements of the list here, using query results...
-
 ?>
 ```
 
